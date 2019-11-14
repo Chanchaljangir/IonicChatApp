@@ -19,13 +19,13 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.authService.logedIn()){
-      if(this.authService.getuserChattype() === 'public')
-        {
-        this.router.navigate(['publicchat']);}
-      else{
-        this.router.navigate(['privatechat']);}
-    }
+    // if(this.authService.logedIn()){
+    //   if(this.authService.getuserChattype() === 'public')
+    //     {
+    //     this.router.navigate(['publicchat']);}
+    //   else{
+    //     this.router.navigate(['privatechat']);}
+    // }
 
     this.signupForm = new FormGroup({
 

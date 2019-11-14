@@ -35,8 +35,8 @@
         </ion-toolbar>
 </ion-header> -->
 
-
-<form id="addGroupform" class="form-horizontal" role="form" [formGroup]="addGroupForm" (submit)="addGroup()">
+ 
+<form id="addGroupform" class="form-horizontal" role="form" [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
         <h2 mat-dialog-title>Create New Group</h2>
         <div class="form-group"> 
                 <label>Enter Group Name<sup>*</sup></label>
@@ -44,7 +44,7 @@
             <span *ngIf="!addGroupForm.get('groupName').valid && addGroupForm.get('groupName').touched" class="spanVaild">Please Enter Group Name</span>
         </div>
         <div class="form-group">
-                    <button class="btn btn-primary" style="margin: 16px;" [disabled]="!addGroupForm.valid">Save</button>
+                    <button class="btn btn-primary" style="margin: 16px;" type="submit" [disabled]="!addGroupForm.valid">Save</button>
                     <button class="btn btn-primary" (click)="close()">Close</button>
                 
         </div>

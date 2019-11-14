@@ -124,27 +124,16 @@
           <div class="contacts">
         
             <ion-list>
-          <ion-item>
-            <div class="d-flex bd-highlight">
+
+          <ion-item *ngFor="let group of groups">
+            <div class="d-flex bd-highlight" *ngIf="!group.private" (click)="chooseGroup(group.groupName, group._id)">
               <div class="img_cont">
-                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
-                <span class="online_icon"></span>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">
+                <!-- <span class="online_icon"></span> -->
               </div>
               <div class="user_info">
-                <span>Yolduz Rafi</span>
-                <p>Yolduz is online</p>
-              </div>
-            </div>
-          </ion-item>
-          <ion-item>
-            <div class="d-flex bd-highlight">
-              <div class="img_cont">
-                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
-                <span class="online_icon"></span>
-              </div>
-              <div class="user_info">
-                <span>Yolduz Rafi</span>
-                <p>Yolduz is online</p>
+                  <span>{{group.groupName}}</span>
+                  <p>{{group.lastmsg}}</p>
               </div>
             </div>
           </ion-item>
