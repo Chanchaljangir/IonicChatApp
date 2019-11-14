@@ -13,9 +13,11 @@ export class PublicChatPage implements OnInit {
   user=JSON.parse(localStorage.getItem('user')); 
   check: boolean;
   selectedGroup_id: any;
+  selectedGroup_name: any;
   constructor(private chatService:ChatServiceService, private dialogServices:DialogServiceService, private chatserverService:ChatserverService) { }
 
   ngOnInit() { 
+    this.check=false;
     //get groups
  this.chatService.addGroup_refresh.subscribe(()=>{
   console.log("inside refresh!!!!!!!!!!");
@@ -47,6 +49,13 @@ private getAllGroups(){
   // this.profileService.groupData(selectGroup_id,selectGroup_name);
   //  document.getElementById("joinGroupDialog").style.visibility="visible";
     // alert("U relly want to join this group");
+    console.log("selected gp name is ", selectGroup_name," and id is ", selectGroup_id);
+    this.selectedGroup_id=selectGroup_id; //########
+    this.selectedGroup_name= selectGroup_name; //#########
+    document.getElementById("chatBlock").style.visibility="visible";
+    document.getElementById("groupinfoBlock").style.visibility="hidden";
+   
+
     this.chatService.getGroupMembers(selectGroup_id).subscribe(
       (res)=>{
         console.log("get members are",res);
@@ -66,7 +75,7 @@ private getAllGroups(){
             
           
           this.selectedGroup_id=selectGroup_id;
-          this.selectedGroup_id= selectGroup_name;
+          this.selectedGroup_name= selectGroup_name;
           console.log("end .....");
          }else{
           // this.dialogServices.joinConfirmDialog(selectGroup_id);
@@ -88,5 +97,10 @@ private getAllGroups(){
     this.dialogServices.addGroupDialog();
     // console.log("addGroupbtn hai",this.chatService.addGroupbtn);
   } 
+
+  backButtonPressed(){
+    document.getElementById("chatBlock").style.visibility="hidden";
+    document.getElementById("groupinfoBlock").style.visibility="visible";
+  }
 }
  

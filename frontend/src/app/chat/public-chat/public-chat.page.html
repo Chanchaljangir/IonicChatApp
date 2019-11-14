@@ -20,57 +20,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="welcome">
-      <ion-label>Welcome in Public Chat</ion-label>
-      <!-- <div class="matmenu" style="float: right;">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-											<mat-icon>more_vert</mat-icon>
-										  </button>
-        <button>
-          <ion-icon name="md-more"></ion-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-         <button mat-menu-item>
-            <ion-icon ios="ios-person" md="md-person"></ion-icon>
-            <span (click)="viewProfile()">View Profile</span>
-          </button>
-            
-          <button mat-menu-item (click)="openDialog()" >
-            <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
-              <span>Create Group</span>
-          </button>
-          <button mat-menu-item *ngIf="this.checkGpAvaliabl" (click)="leave()">
-              <span>Leave Group</span>
-          </button> 
-          <button mat-menu-item>
-            <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-              <span (click)="deleteChat()">Delete Chat</span>
-          </button>
-          <button mat-menu-item (click)=logout()>
-            <ion-icon ios="ios-power" md="md-power"></ion-icon>
-            <span>Log Out</span>
-          </button> 
-          </mat-menu>
-      </div> -->
-   
-     <!-- <div class="matmenu" style="float: right;">
-        	<button (click)="menu">
-              <ion-icon name="md-more"></ion-icon>
-          </button>
-          <div #menu>
-              <ion-menu side="start" menuId="first" #menu>
-                  <ion-content>
-                    <ion-list>
-                      <ion-item>Menu Item</ion-item>
-                      <ion-item>Menu Item</ion-item>
-                      <ion-item>Menu Item</ion-item>
-                      <ion-item>Menu Item</ion-item>
-                      <ion-item>Menu Item</ion-item>
-                    </ion-list>
-                  </ion-content>
-                </ion-menu>
+      <!-- back button -->
+      <div class="backbtn">
+            <ion-buttons >
+                <ion-back-button defaultHref="/publicchat" (click)="backButtonPressed()"></ion-back-button>
+              </ion-buttons>
         </div>
-      </div> -->
+      <ion-label>Welcome in Public Chat</ion-label>
       
+
       <div class="ion-float-end">
           <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: white;">
             <mat-icon>more_vert</mat-icon>
@@ -106,7 +64,7 @@
 
   <!-- <label class="welcome">Welcome in Public Chat</label> -->
 
-  <div class="container-fluid h-100">
+  <div class="container-fluid h-100" id="groupinfoBlock">
     <div class="row justify-content-center h-100">
       <div class="col-md-4 col-xl-3 chat">
         <div class="card mb-sm-3 mb-md-0 contacts_card">
@@ -156,5 +114,116 @@
       </div>
     </div>
     </div>
+  </div>
+
+
+
+  <div id="chatBlock">
+      <div class="container-fluid h-100">
+          <div class="row justify-content-center h-100">
+        
+            <div class="col-md-8 col-xl-6 chat">
+              <div class="card">
+                <!-- <div class="card-header msg_head">
+                  <div class="d-flex bd-highlight">
+                    <div class="img_cont">
+                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                      <span class="online_icon"></span>
+                    </div>
+                    <div class="user_info">
+                      <span>Chat with Khalid</span>
+                      <p>1767 Messages</p>
+                    </div>
+                  </div>
+                  <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+                  <div class="action_menu">
+                    <ul>
+                      <li><i class="fas fa-user-circle"></i> View profile</li>
+                      <li><i class="fas fa-users"></i> Add to close friends</li>
+                      <li><i class="fas fa-plus"></i> Add to group</li>
+                      <li><i class="fas fa-ban"></i> Block</li>
+                    </ul>
+                  </div>
+                </div> -->
+                <div class="card-body msg_card_body">
+                  <div class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg">
+                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer">
+                      Hi, how are you samim?
+                      <span class="msg_time">8:40 AM, Today</span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end mb-4">
+                    <div class="msg_cotainer_send">
+                      Hi Khalid i am good tnx how about you?
+                      <span class="msg_time_send">8:55 AM, Today</span>
+                    </div>
+                    <div class="img_cont_msg">
+                  <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg">
+                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer">
+                      I am good too, thank you for your chat template
+                      <span class="msg_time">9:00 AM, Today</span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end mb-4">
+                    <div class="msg_cotainer_send">
+                      You are welcome
+                      <span class="msg_time_send">9:05 AM, Today</span>
+                    </div>
+                    <div class="img_cont_msg">
+                  <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg">
+                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer">
+                      I am looking for your next templates
+                      <span class="msg_time">9:07 AM, Today</span>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end mb-4">
+                    <div class="msg_cotainer_send">
+                      Ok, thank you have a good day
+                      <span class="msg_time_send">9:10 AM, Today</span>
+                    </div>
+                    <div class="img_cont_msg">
+                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg">
+                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer">
+                      Bye, see you
+                      <span class="msg_time">9:12 AM, Today</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="input-group">
+                    <div class="input-group-append">
+                      <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                    </div>
+                    <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                    <div class="input-group-append">
+                      <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </ion-content>

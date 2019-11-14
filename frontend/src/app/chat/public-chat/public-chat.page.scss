@@ -326,8 +326,10 @@ margin-bottom: 15px !important;
   }
   .welcome{
     // padding-left: 254px;
+    padding-left: 0;
+    padding-right: 0;
     width: 100%;
-    font-size: x-large;
+    // font-size: x-large;
     color: deeppink;
     font-weight: 500;
     /* text-decoration-line: underline; */
@@ -556,4 +558,18 @@ margin-bottom: 15px !important;
     border-radius: 5px; 
     // border: 1px solid #d9d9d9;
     outline: 0;
+  }
+
+  #groupinfoBlock{
+    position: absolute;
+  }
+  #chatBlock{
+    position: relative;
+  }
+  .backbtn{
+    display: inline-block;
+    width: 10%;
+    padding-left: 0;
+    margin-left: 0;
+    padding-right: 51px;
   }

@@ -36,7 +36,7 @@
 </ion-header> -->
 
  
-<form id="addGroupform" class="form-horizontal" role="form" [formGroup]="addGroupForm" (ngSubmit)="addGroup()">
+<form id="addGroupform" class="form-horizontal" role="form" [formGroup]="addGroupForm" (submit)="addGroup()">
         <h2 mat-dialog-title>Create New Group</h2>
         <div class="form-group"> 
                 <label>Enter Group Name<sup>*</sup></label>
@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
                     <button class="btn btn-primary" style="margin: 16px;" type="submit" [disabled]="!addGroupForm.valid">Save</button>
-                    <button class="btn btn-primary" (click)="close()">Close</button>
+                    <button class="btn btn-primary" type="button" (click)="close()">Close</button>
                 
         </div>
 </form> 
