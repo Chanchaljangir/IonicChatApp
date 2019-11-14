@@ -14,3 +14,23 @@ sup{
     width: 100%;
     float: left;
 }
+.spanVaild{
+    color: red;
+}
+.setimg{
+    background-image: url("https://ak9.picdn.net/shutterstock/videos/21971689/thumb/1.jpg");
+    background-size: 100% 100%;
+    height: 100vh;
+    float: left;
+    width: 100%
+}
+.disabledpro{
+    color:rgb(170, 167, 173);
+}
+sup{
+    color: red;
+    /* font-size: larger; */
+}
+.form-control{
+    height: calc(3.25rem + 2px)!important;
+}

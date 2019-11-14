@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PublicChatPage } from './public-chat.page';
 import { MaterialModule } from 'src/app/material.module';
-import { CreateGroupComponent } from 'src/app/dialog-modules/create-group/create-group.component';
+// import { CreateGroupComponent } from 'src/app/dialog-modules/create-group/create-group.component';
 import { MatDialogModule } from '@angular/material';
 
 
@@ -25,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [PublicChatPage,CreateGroupComponent],
+  declarations: [PublicChatPage],
   imports: [
     CommonModule, 
     FormsModule, 
@@ -39,10 +39,10 @@ const routes: Routes = [
     // MatButtonModule, MatCheckboxModule,MatMenuModule,MatIconModule
   ],
   // exports: [MatButtonModule, MatCheckboxModule,MatIconModule],
-  exports: [MatDialogModule,CreateGroupComponent],
-  entryComponents:[
-    CreateGroupComponent
-  ],
+  exports: [MatDialogModule],
+  // entryComponents:[
+  //   CreateGroupComponent
+  // ],
 })
 export class PublicChatPageModule {}
  

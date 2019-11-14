@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 export class AuthService{
   authToken:any;
   user:any;
-  // url = environment.url;
   constructor(private http:HttpClient) { }
   // for registeration
   registerUser(user):Observable<any>{
@@ -26,12 +25,12 @@ export class AuthService{
       localStorage.setItem('id_token', token);
       localStorage.setItem('user', JSON.stringify(user));
       this.authToken = token;
-      this.user = user; 
+      this.user = user;
       // console.log(this.authToken, this)
     }
 
   // for login 
-  AuthLogin(userauth):Observable<any>{  
+  AuthLogin(userauth):Observable<any>{ 
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
@@ -51,6 +50,51 @@ export class AuthService{
   getToken() {
     return localStorage.getItem('id_token');
   }
+
+  //get user chattype
+  getuserChattype(){
+    let user=JSON.parse(localStorage.getItem('user'));
+    return user.chattype;
+  }
+
+// //online users in chat room
+// putOnlineUsers(user_id){
+//   let headers=new HttpHeaders();
+//   headers.append('Content-Type','application/json');
+//   return this.http.post('http://localhost:3000/api/onlineUsers/'+user_id,{headers:headers})
+// .pipe(map(res=>res));
+// } 
+// offlineUser(user_id){
+//   let headers=new HttpHeaders();
+//   headers.append('Content-Type','application/json');
+//   return this.http.delete('http://localhost:3000/api/offlineUser/'+user_id,{headers:headers})
+// .pipe(map(res=>res));
+// } 
+// getOnlineUsers(){
+//   let headers=new HttpHeaders();
+//   headers.append('Content-Type','application/json');
+//   return this.http.get('http://localhost:3000/api/getOnlineUsers',{headers:headers}).toPromise();
+// }
+
+
+//online users in Users table
+putOnlineUsers(user_id){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.patch('http://localhost:3000/api/onlineUsers/'+user_id,{headers:headers})
+.pipe(map(res=>res));
+} 
+offlineUser(user_id){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.patch('http://localhost:3000/api/offlineUser/'+user_id,{headers:headers})
+.pipe(map(res=>res));
+} 
+getOnlineUsers(){
+  let headers=new HttpHeaders();
+  headers.append('Content-Type','application/json');
+  return this.http.get('http://localhost:3000/api/getOnlineUsers',{headers:headers}).toPromise();
+}
 //for 1 time online 
   // AuthLogin(userauth):Observable<any>{ 
   //   let headers=new HttpHeaders();

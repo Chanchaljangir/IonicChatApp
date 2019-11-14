@@ -5,28 +5,31 @@
 </ion-header>
  
 <ion-content padding>
-  <form [formGroup]="RegisterForm" (ngSubmit)="register()">
+  <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
     <ion-item>
       <ion-label position="floating">UserName<sup>*</sup></ion-label>
       <ion-input type="email" formControlName="username"></ion-input>
+      <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched" class="spanVaild">Please Enter Your First Name</span>
     </ion-item> 
 
     <ion-item>
       <ion-label position="floating">Email<sup>*</sup></ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
+      <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched" class="spanVaild">Please Enter Your valid Email Address</span>
     </ion-item> 
  
     <ion-item>
       <ion-label position="floating">Password<sup>*</sup></ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
+      <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched" class="spanVaild">Please Enter Your Password</span>
     </ion-item>
-
     <ion-item>
-      <ion-label position="floating">Phone Number(Optional)</ion-label>
-      <ion-input type="number" formControlName="phone"></ion-input>
+        <ion-label position="floating">Re-Password<sup>*</sup></ion-label>
+        <ion-input type="re-password" formControlName="repassword"></ion-input>
+        <span *ngIf="!signupForm.get('repassword').valid && signupForm.get('repassword').touched" class="spanVaild">Password must match</span>
     </ion-item>
  
-    <ion-button expand="full" type="submit"  [disabled]="!RegisterForm.valid">Register</ion-button>
+    <ion-button expand="full" type="submit"  [disabled]="!signupForm.valid">Register</ion-button>
  
   </form>
   <ion-label class="orclass">OR</ion-label><br>

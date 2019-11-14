@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.AuthLogin(this.loginRegisterForm.value).subscribe(async (data)=>{
       if(data.success){
-     
+        console.log("login data... ",data);
+        this.authService.storeUserData(data.token,data.user);
       const toast=await this.toastControler.create({
         message:'You are successfully logIn',
         duration:3000,
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
       });
       toast.present();
         console.log(data);
-        this.router.navigate(['./home']);
+        this.router.navigate(['/publicchat']);
       }
       else{
         this.toastOption={
