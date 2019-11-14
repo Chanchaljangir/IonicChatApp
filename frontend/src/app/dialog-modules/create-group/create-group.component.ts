@@ -22,7 +22,7 @@ export class CreateGroupComponent implements OnInit {
     ngOnInit() {
     this.addGroupForm = new FormGroup({
       'groupName' : new FormControl(null, Validators.required), 
-      // 'createdBy': new FormControl(this.user.id),
+      'createdBy': new FormControl(this.user.id),
       'date': new FormControl(Date())
   }); 
   console.log("user###### ", this.user);
@@ -33,34 +33,34 @@ export class CreateGroupComponent implements OnInit {
   close(){
     this.dialogRef.close("closed");
   }
-// addGroup(){
-//   console.log("addgrup call in dialog");
-//   this.chatService.addGroup(this.addGroupForm.value).subscribe(async data=>{
-//     if(data.success){
-//         console.log("new group is ", data);
-//         const toast=await this.toastControler.create({
-//           message:'Group Added', 
-//           duration:3000, 
-//           color:"success", 
-//           showCloseButton:true 
-//         }); 
-//         toast.present();  
-//         // location.reload(); 
-//   }
-//   else{ 
-//     // console.log(data);
-//     const toast=await this.toastControler.create({
-//       message:'Group not added, try it again', 
-//       duration:3000, 
-//       color:"danger", 
-//       showCloseButton:true 
-//     }); 
-//     toast.present(); 
+addGroup(){
+  console.log("addgrup call in dialog");
+  this.chatService.addGroup(this.addGroupForm.value).subscribe(async data=>{
+    if(data.success){
+        console.log("new group is ", data);
+        const toast=await this.toastControler.create({
+          message:'Group Added', 
+          duration:3000, 
+          color:"success", 
+          showCloseButton:true 
+        }); 
+        toast.present();  
+        // location.reload(); 
+  }
+  else{ 
+    // console.log(data);
+    const toast=await this.toastControler.create({
+      message:'Group not added, try it again', 
+      duration:3000, 
+      color:"danger", 
+      showCloseButton:true 
+    }); 
+    toast.present(); 
     
-//   } 
-//   this.dialogRef.close("closed");
-// });
-// }
+  } 
+  this.dialogRef.close("closed");
+});
+}
 
 }
 
