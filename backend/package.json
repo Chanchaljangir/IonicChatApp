@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ChatBackend",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.6.7",
+    "socket.io": "^2.2.0",
+    "balanced-match": "^1.0.0",
+    "bcryptjs": "*",
+    "body-parser": "^1.19.0",
+    "cors": "*",
+    "dotenv": "^8.0.0",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  }
+}

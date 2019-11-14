@@ -1,0 +1,8 @@
+{
+  "appId": "com.chat.app",
+  "appName": "frontend",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

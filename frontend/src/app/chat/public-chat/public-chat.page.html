@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+		<!-- <script src="../../assets/javascriptFiles/chatScript.js"></script> -->
+		 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		 <!-- <link rel="stylesheet" href="C:/ChatApp/ChatApp/frontend/src/assets/css/emojionearea.min.css"> -->
+		 <!-- <link rel="stylesheet" href="../../../../assets/css/emojionearea.min.css"> -->
+		 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		 <!-- <script src="../../../../assets/javascriptFiles/emojionearea.min.js"></script> -->
+     <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+     
+     <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@4.7.4/css/ionic.bundle.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="welcome">
+      <ion-label>Welcome in Public Chat</ion-label>
+      <!-- <div class="matmenu" style="float: right;">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+											<mat-icon>more_vert</mat-icon>
+										  </button>
+        <button>
+          <ion-icon name="md-more"></ion-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+         <button mat-menu-item>
+            <ion-icon ios="ios-person" md="md-person"></ion-icon>
+            <span (click)="viewProfile()">View Profile</span>
+          </button>
+            
+          <button mat-menu-item (click)="openDialog()" >
+            <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+              <span>Create Group</span>
+          </button>
+          <button mat-menu-item *ngIf="this.checkGpAvaliabl" (click)="leave()">
+              <span>Leave Group</span>
+          </button> 
+          <button mat-menu-item>
+            <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+              <span (click)="deleteChat()">Delete Chat</span>
+          </button>
+          <button mat-menu-item (click)=logout()>
+            <ion-icon ios="ios-power" md="md-power"></ion-icon>
+            <span>Log Out</span>
+          </button> 
+          </mat-menu>
+      </div> -->
+   
+     <!-- <div class="matmenu" style="float: right;">
+        	<button (click)="menu">
+              <ion-icon name="md-more"></ion-icon>
+          </button>
+          <div #menu>
+              <ion-menu side="start" menuId="first" #menu>
+                  <ion-content>
+                    <ion-list>
+                      <ion-item>Menu Item</ion-item>
+                      <ion-item>Menu Item</ion-item>
+                      <ion-item>Menu Item</ion-item>
+                      <ion-item>Menu Item</ion-item>
+                      <ion-item>Menu Item</ion-item>
+                    </ion-list>
+                  </ion-content>
+                </ion-menu>
+        </div>
+      </div> -->
+      
+      <div class="ion-float-end">
+          <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: white;">
+            <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item style="background-color: white;">
+               <mat-icon (click)="viewProfile()">perm_identity</mat-icon>
+              <span (click)="viewProfile()">View Profile</span>
+            </button> 
+            <button mat-menu-item (click)="openDialog()" style="background-color: white;">
+              <mat-icon>group_add</mat-icon>
+                <span>Create Group</span>
+            </button>
+            <button mat-menu-item *ngIf="this.checkGpAvaliabl" (click)="leave()" style="background-color: white;">
+                <mat-icon>person_add_disabled</mat-icon>
+                <span>Leave Group</span>
+            </button>
+            <button mat-menu-item style="background-color: white;">
+                <mat-icon (click)="deleteChat()">delete_outline</mat-icon>
+                <span (click)="deleteChat()">Delete Chat</span>
+            </button>
+            <button mat-menu-item (click)=logout() style="background-color: white;">
+              <mat-icon>power_settings_new</mat-icon>
+              <span>Log Out</span>
+            </button>  
+            </mat-menu>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <label class="welcome">Welcome in Public Chat</label> -->
+
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+      <div class="col-md-4 col-xl-3 chat">
+        <div class="card mb-sm-3 mb-md-0 contacts_card">
+        <div class="card-header">
+          <div class="input-group">
+            <!-- <input type="text" placeholder="Search..." name="" class="form-control search" >
+            <div class="input-group-prepend">
+              <span class="input-group-text search_btn"><i class="fas fa-search" (click)="search()"></i></span>
+            </div> -->
+            <ion-searchbar></ion-searchbar>
+          </div> 
+        </div> 
+        <div class="card-body contacts_body">
+          <!-- <button (click)="openDialog()">open</button> -->
+          <div class="contacts">
+        
+            <ion-list>
+          <ion-item>
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+                <span class="online_icon"></span>
+              </div>
+              <div class="user_info">
+                <span>Yolduz Rafi</span>
+                <p>Yolduz is online</p>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item>
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+                <span class="online_icon"></span>
+              </div>
+              <div class="user_info">
+                <span>Yolduz Rafi</span>
+                <p>Yolduz is online</p>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item>
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+                <span class="online_icon"></span>
+              </div>
+              <div class="user_info">
+                <span>Yolduz Rafi</span>
+                <p>Yolduz is online</p>
+              </div>
+            </div>
+          </ion-item>
+            </ion-list>
+                  </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+  </div>
+</ion-content>

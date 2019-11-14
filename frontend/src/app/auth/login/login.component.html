@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <form [formGroup]="loginRegisterForm" (ngSubmit)="onSubmit()">
+ 
+    <ion-item>
+      <ion-label position="floating">Email<sup>*</sup></ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item> 
+ 
+    <ion-item>
+      <ion-label position="floating">Password<sup>*</sup></ion-label>
+      <ion-input [type]="passwordType" clearOnEdit="false" formControlName="password" clearOnEdit="false" class="password"></ion-input>
+      <ion-icon  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+    </ion-item>
+    <!-- item-end -->
+    <ion-button expand="full" type="submit" [disabled]="!loginRegisterForm.valid">Login</ion-button>
+    <!-- <ion-button expand="full" type="button" (click)="register()" [disabled]="!loginRegisterForm.valid">Register</ion-button> -->
+ 
+  </form>
+  <ion-label class="orclass">OR</ion-label><br>
+  <!-- <img src="https://i1.wp.com/sbo2com.net/wp-content/uploads/2018/10/register-icon.png?fit=250%2C242&amp;ssl=1" class="loginImg" (click)="goTORegisterPage()"> 
+  <img src="https://www.somerset.k12.wi.us/high/ACT%20Register%20Blue%20Button.png" class="loginImg" (click)="goTORegisterPage()"> -->
+  <img src="http://www.taxgenius.co.in/assets/images/register.png" class="loginImg" (click)="goTORegisterPage()">
+  <!-- <img src="https://www.freeiconspng.com/uploads/register-button-png-0.png" class="loginImg" (click)="goTORegisterPage()"> -->
+</ion-content>

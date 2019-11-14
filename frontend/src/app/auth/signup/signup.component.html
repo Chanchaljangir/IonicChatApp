@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <form [formGroup]="RegisterForm" (ngSubmit)="register()">
+    <ion-item>
+      <ion-label position="floating">UserName<sup>*</sup></ion-label>
+      <ion-input type="email" formControlName="username"></ion-input>
+    </ion-item> 
+
+    <ion-item>
+      <ion-label position="floating">Email<sup>*</sup></ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item> 
+ 
+    <ion-item>
+      <ion-label position="floating">Password<sup>*</sup></ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone Number(Optional)</ion-label>
+      <ion-input type="number" formControlName="phone"></ion-input>
+    </ion-item>
+ 
+    <ion-button expand="full" type="submit"  [disabled]="!RegisterForm.valid">Register</ion-button>
+ 
+  </form>
+  <ion-label class="orclass">OR</ion-label><br>
+  <img src="https://www.piilotalent.com/wp-content/uploads/2016/02/LOGIN-BUTTON2.png" class="loginImg" (click)="goTOLoginPage()">
+</ion-content>
+

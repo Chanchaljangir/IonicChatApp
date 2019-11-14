@@ -1,0 +1,33 @@
+// .background-image{
+//     --background: url(../../../assets/img/loginReg.jpg) 0 0/100% 100% no-repeat;
+// }  
+// .contant{
+//     background: url('https://i.pinimg.com/originals/3d/14/01/3d14010c94acd2a1f6bb983e00e08847.jpg');
+// }
+ion-content{
+    --background: url('http://eskipaper.com/images/purple-ios7-wallpaper-1.jpg') no-repeat center center / cover;
+}
+sup{
+    color:red;
+}
+.loginImg{
+    height: 90px;
+    margin: auto;
+    display: block;
+}
+.orclass{
+    text-align: center !important;
+    width: 100%;
+    float: left;
+}
+.passwordIcon{
+    font-size:2rem !important;
+    position: relative !important;
+    // top: 22px !important;
+    margin: 0 auto !important;
+ }
+//  font-size: 2rem !important;
+//  /* position: relative !important; */
+//  margin: 0px auto !important;
+//  margin-left: 24px;
+//  margin-right: 0px !important;
