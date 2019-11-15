@@ -146,77 +146,107 @@
                   </div>
                 </div> -->
                 <div class="card-body msg_card_body">
-                  <div class="d-flex justify-content-start mb-4">
-                    <div class="img_cont_msg">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                    <div class="msg_cotainer">
-                      Hi, how are you samim?
-                      <span class="msg_time">8:40 AM, Today</span>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-end mb-4">
-                    <div class="msg_cotainer_send">
-                      Hi Khalid i am good tnx how about you?
-                      <span class="msg_time_send">8:55 AM, Today</span>
-                    </div>
-                    <div class="img_cont_msg">
-                  <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-start mb-4">
-                    <div class="img_cont_msg">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                    <div class="msg_cotainer">
-                      I am good too, thank you for your chat template
-                      <span class="msg_time">9:00 AM, Today</span>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-end mb-4">
-                    <div class="msg_cotainer_send">
-                      You are welcome
-                      <span class="msg_time_send">9:05 AM, Today</span>
-                    </div>
-                    <div class="img_cont_msg">
-                  <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-start mb-4">
-                    <div class="img_cont_msg">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                    <div class="msg_cotainer">
-                      I am looking for your next templates
-                      <span class="msg_time">9:07 AM, Today</span>
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-end mb-4">
-                    <div class="msg_cotainer_send">
-                      Ok, thank you have a good day
-                      <span class="msg_time_send">9:10 AM, Today</span>
-                    </div>
-                    <div class="img_cont_msg">
-                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                  </div>
-                  <div class="d-flex justify-content-start mb-4">
-                    <div class="img_cont_msg">
-                      <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                    </div>
-                    <div class="msg_cotainer">
-                      Bye, see you
-                      <span class="msg_time">9:12 AM, Today</span>
-                    </div>
-                  </div>
+
+
+
+<ng-container *ngIf="selectedGroup_id">
+				<div *ngFor="let chat of msgList">
+				<div *ngIf="chat.group_id === selectedGroup_id">	
+          
+         
+            <div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===chat.user || this.user.id===chat.user_id;else sendmsg" >
+              	<label class="toUserName">You</label>	  
+                 <div class="msg_cotainer_send">
+                    {{chat.msg}}
+                  <span class="msg_time_send">{{chat.date| date:'medium'}}</span>
                 </div>
+                <div class="img_cont_msg">
+              <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+                </div>
+              </div>
+
+
+		<!-- <div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===chat.user || this.user.id===chat.user_id;else sendmsg" >
+						<label class="toUserName">You</label>	
+							<div class="msg_cotainer_send">
+										<ng-template #plaintxt>
+												{{chat.msg}}
+											</ng-template>
+											<br>
+									<span class="msg_time_send_by_me">{{chat.date| date:'medium'}}</span>
+								</div>
+							<div class="img_cont_msg">
+						<img src="" class="rounded-circle user_img_msg">
+							</div>
+    </div> -->
+    
+  
+		<ng-template #sendmsg>
+        <div class="d-flex justify-content-start mb-4">
+            <div class="img_cont_msg">
+              <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+            </div>
+            <div class="msg_cotainer">
+                {{chat.msg}}
+              <span class="msg_time">{{chat.date| date:'medium'}}</span>
+            </div>
+            <label class="fromUserName">~other</label>
+          </div>
+
+				<!-- <div class="d-flex justify-content-start mb-4" >
+							<div class="img_cont_msg">
+								<img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+							</div>
+							<div class="msg_cotainer_send">
+                <h1>aa</h1>
+										
+										<ng-template #plaintxt>
+												{{chat.msg}}
+											</ng-template><br>
+								<span class="msg_time_by_me">{{chat.date| date:'medium'}}</span>
+							</div>
+							<label class="fromUserName">~{{convertIdByUser}}</label>
+		</div> -->
+		</ng-template>
+					</div>
+				</div></ng-container>
+
+
+
+        <div class="card-body msg_card_body">
+            <div class="d-flex justify-content-start mb-4">
+              <div class="img_cont_msg">
+                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+              </div>
+              <div class="msg_cotainer">
+                Hi, how are you samim?
+                <span class="msg_time">8:40 AM, Today</span>
+              </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                Hi Khalid i am good tnx how about you?
+                <span class="msg_time_send">8:55 AM, Today</span>
+              </div>
+              <div class="img_cont_msg">
+            <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+              </div>
+            </div>
+            </div>
+
+                </div>
+
+
                 <div class="card-footer">
                   <div class="input-group">
                     <div class="input-group-append">
                       <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                     </div>
-                    <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-                    <div class="input-group-append">
+                    <textarea  [(ngModel)]="textValue" #message="ngModel"  name="" id="msgTextarea" class="form-control type_msg" placeholder="Type your message..." [(ngModel)]="msg"></textarea>
+                    <div class="input-group-append" (click)="sendMessage()" onclick=" document.getElementById('msgTextarea').value = ''">
+                    <!-- <div class="input-group-append"> -->
                       <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
                     </div>
                   </div>

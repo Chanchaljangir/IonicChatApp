@@ -5,7 +5,7 @@ import { Observable, observable } from 'rxjs';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 // import {map} from 'rxjs/operators';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class ChatserverService {

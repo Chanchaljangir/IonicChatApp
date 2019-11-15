@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { CreateGroupComponent } from 'src/app/dialog-modules/create-group/create-group.component';
+import { JoinConfimationComponent } from 'src/app/dialog-modules/join-confimation/join-confimation.component';
 
 @Injectable({
   providedIn: 'root'
@@ -48,16 +49,16 @@ export class DialogServiceService {
   //   })
   // }
 
-  // joinConfirmDialog(selectGroup_id):void{
-  //   let MatDialogRef=this.dialog.open(JoinConfimationComponent,{
-  //     data:selectGroup_id
-  //   })
-  //   MatDialogRef.afterClosed().subscribe(result=>{
-  //     console.log("joinConfirmDialog was closed");
-  //     console.log("joinConfirmDialog result is",result);
-  //    this.joinConfirm_result= result;
-  //   })
-  // }
+  joinConfirmDialog(selectGroup_id):void{
+    let MatDialogRef=this.dialog.open(JoinConfimationComponent,{
+      data:selectGroup_id
+    })
+    MatDialogRef.afterClosed().subscribe(result=>{
+      console.log("joinConfirmDialog was closed");
+      console.log("joinConfirmDialog result is",result);
+     this.joinConfirm_result= result;
+    })
+  }
 
 
   // addPaticipates(){
