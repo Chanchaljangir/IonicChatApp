@@ -28,6 +28,7 @@ body,html{
     border-radius: 15px !important;
     border: 0px solid !important;
     // background-color: rgba(0,0,0,0.4) !important;
+    // background-color: rgba(0, 0, 0, 0.4) !important;
 }
 .contacts_body{
     padding:  0.75rem 0 !important;
@@ -111,9 +112,9 @@ background-color: rgba(0,0,0,0.3) !important;
     background-color: rgba(0,0,0,0.3);
 }
 .user_img{
-    height: 70px;
-    width: 70px;
-    border:1.5px solid #f5f6fa;
+  height: 62px;
+  width: 62px;
+  border:1.5px solid #f5f6fa;
 
 }
 .user_img_msg{
@@ -132,32 +133,31 @@ background-color: rgba(0,0,0,0.3) !important;
     width: 40px;
 }
 .online_icon{
-position: absolute;
-height: 15px;
-width:15px;
-background-color: #4cd137;
-border-radius: 50%;
-bottom: 0.2em;
-right: 0.4em;
-border:1.5px solid white;
-}
-.offline{
-background-color: #c23616 !important;
-}
-.user_info{
-margin-top: auto;
-margin-bottom: auto;
-margin-left: 15px;
-cursor: pointer;
-}
-.user_info span{
-font-size: 20px;
-// color: white;
-}
-.user_info p{
-font-size: 10px;
-// color: rgba(255,255,255,0.6);
-}
+  position: absolute;
+  height: 15px;
+  width:15px;
+  background-color: #4cd137;
+  border-radius: 50%;
+  bottom: 0.6em;
+  right: 0.4em;
+  border:1.5px solid white;
+  }
+  .offline{
+  background-color: #c23616 !important;
+  }
+  .user_info{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+    }
+    .user_info span{
+    // font-size: 20px;
+    // color: white;
+    }
+    .user_info p{
+    font-size: 9px;
+    // color: rgba(255,255,255,0.6);
+    }
 .video_cam{
 margin-left: 50px;
 margin-top: 5px;
@@ -510,45 +510,6 @@ margin-bottom: 15px !important;
     top: 72px;
   }
 
-  /* .chat-footer button {
-    border: none;
-    width: 50px;
-    height: auto;
-    padding: 0;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
-
-  /* .toggle-emoji svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .giphy-search {
-    position: fixed;
-    bottom: 70px;
-    right: 20px;
-    width: 300px;
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-  } */
-
-  /* .giphy-search input {
-    width: 100%;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  .gif-result img {
-    cursor: pointer;
-  } */
   .emoji-mart-search input{
     /* width: 87% !important; */
     font-size: 16px;

@@ -55,6 +55,10 @@ export class PublicChatPage implements OnInit {
   constructor(private chatService:ChatServiceService, private dialogServices:DialogServiceService, private chatserverService:ChatserverService) { }
 
   async ngOnInit() { 
+    document.getElementById("chatBlock").style.visibility="hidden";
+    document.getElementById("chatHeader").style.visibility="hidden";
+    document.getElementById("groupinfoBlock").style.visibility="visible";
+    document.getElementById("gpnameHeader").style.visibility="visible";
     this.check=false;
     //get groups
  this.chatService.addGroup_refresh.subscribe(()=>{
@@ -101,19 +105,20 @@ this.leaveGroupForm = new FormGroup({
    });
 
 //get odd chat
-// this.chatService.getChat().subscribe(async data=>{
-//  if(data.success)
-//  {  
-//    console.log("get msg is ", this.getmsg)
-//   }
-//   for(let i=0; i<data.res.length;i++)
-//   {
-//    let covertID= await this.profileService.getUserProfile1(data.res[i].fromUser);  
-//       this.getmsg.push({'username':covertID['res'][0].username,'image':covertID['res'][0].image,'0':data.res[i]})
+this.chatService.getChat().subscribe(async data=>{
+ if(data.success)
+ {  
+   console.log("get msg is ", this.getmsg)
+  }
+  for(let i=0; i<data.res.length;i++)
+  {
+  //  let covertID= await this.profileService.getUserProfile1(data.res[i].fromUser);  
+      // this.getmsg.push({'username':covertID['res'][0].username,'image':covertID['res'][0].image,'0':data.res[i]})
+      this.getmsg.push({'0':data.res[i]})
    
-//   } 
-//   console.log("getmsg 1 is ", this.getmsg);
-// }); 
+  } 
+  console.log("getmsg 1 is ", this.getmsg);
+}); 
 
 //left group
  this.chatserverService.userLeftGroup().subscribe(      
@@ -211,7 +216,9 @@ private getAllGroups(){
         } 
         if(this.check){
           document.getElementById("chatBlock").style.visibility="visible";
+          document.getElementById("chatHeader").style.visibility="visible";
           document.getElementById("groupinfoBlock").style.visibility="hidden";
+          document.getElementById("gpnameHeader").style.visibility="hidden";
           console.log("hai");
           this.check=false;
           console.log("slected group is", selectGroup_id," user is ", this.user.id," username is ",this.user.username);
@@ -253,7 +260,10 @@ async sendMessage(){
 
   backButtonPressed(){
     document.getElementById("chatBlock").style.visibility="hidden";
+    document.getElementById("chatHeader").style.visibility="hidden";
     document.getElementById("groupinfoBlock").style.visibility="visible";
+    document.getElementById("gpnameHeader").style.visibility="visible";
+
   }
 }
  
