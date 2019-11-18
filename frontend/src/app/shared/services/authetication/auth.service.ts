@@ -3,11 +3,12 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 // // import { CookieService } from 'ngx-cookie-service';
-// import {environment} from '../../environments/environment';
+import {environment} from '../../../../environments/environment'; 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService{
+  url = environment.url;
   authToken:any;
   user:any;
   constructor(private http:HttpClient) { }
@@ -15,7 +16,7 @@ export class AuthService{
   registerUser(user):Observable<any>{
     let headers =new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/signup',user,{headers:headers})
+    return this.http.post(`${this.url}/api/signup`,user,{headers:headers})
     .pipe(map(res=>res));
   } 
 
@@ -33,7 +34,7 @@ export class AuthService{
   AuthLogin(userauth):Observable<any>{ 
     let headers=new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/api/authenticate',userauth,{headers:headers})
+    return this.http.post(`${this.url}/api/authenticate`,userauth,{headers:headers})
   .pipe(map(res=>res));
   }
 
@@ -81,19 +82,19 @@ export class AuthService{
 putOnlineUsers(user_id){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/onlineUsers/'+user_id,{headers:headers})
+  return this.http.patch(`${this.url}/api/onlineUsers/`+user_id,{headers:headers})
 .pipe(map(res=>res));
 } 
 offlineUser(user_id){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/offlineUser/'+user_id,{headers:headers})
+  return this.http.patch(`${this.url}/api/offlineUser/`+user_id,{headers:headers})
 .pipe(map(res=>res));
 } 
 getOnlineUsers(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getOnlineUsers',{headers:headers}).toPromise();
+  return this.http.get(`${this.url}/api/getOnlineUsers`,{headers:headers}).toPromise();
 }
 //for 1 time online 
   // AuthLogin(userauth):Observable<any>{ 

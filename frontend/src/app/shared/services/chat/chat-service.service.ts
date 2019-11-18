@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {map,tap} from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
+import {environment} from '../../../../environments/environment'; 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatServiceService {
+  url = environment.url;
   private modals: any[] = [];
   addGroupbtn: any;
   baseApiUrl: string;
@@ -24,7 +26,7 @@ export class ChatServiceService {
       // console.log("this.addGroupbtn ", this.addGroupbtn);
       let headers=new HttpHeaders();
       headers.append('Content-Type','application/json');
-      return this.http.post('http://localhost:3000/api/addgroup',groupName,{headers:headers})
+      return this.http.post(`${this.url}/api/addgroup`,groupName,{headers:headers})
       .pipe(
         tap(()=>{
           this._addGroup.next();
@@ -36,7 +38,7 @@ export class ChatServiceService {
 getGroup():Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getgroup',{headers:headers})
+  return this.http.get(`${this.url}/api/getgroup`,{headers:headers})
 .pipe(map(res=>res));
 }
 
@@ -44,14 +46,14 @@ getGroup():Observable<any>{
 getUsers():Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getusers',{headers:headers})
+  return this.http.get(`${this.url}/api/getusers`,{headers:headers})
 .pipe(map(res=>res));
 }
 // save odd chats
 addChat(msgList):Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.post('http://localhost:3000/api/chatting',msgList,{headers:headers})
+  return this.http.post(`${this.url}/api/chatting`,msgList,{headers:headers})
 .pipe(map(res=>res));
 }
 
@@ -59,7 +61,7 @@ addChat(msgList):Observable<any>{
 getChat():Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getchat',{headers:headers})
+  return this.http.get(`${this.url}/api/getchat`,{headers:headers})
 .pipe(map(res=>res));
 }
  
@@ -75,7 +77,7 @@ logout()
 addParticipant(group_id,user_id):Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/addMembers/'+group_id,user_id,{headers:headers})
+  return this.http.patch(`${this.url}/api/addMembers/`+group_id,user_id,{headers:headers})
 .pipe(map(res=>res));
 }
 
@@ -83,7 +85,7 @@ addParticipant(group_id,user_id):Observable<any>{
 getGroupMembers(id):Observable<any>{ 
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/getGroupMembers/'+id,{headers:headers})
+  return this.http.get(`${this.url}/api/getGroupMembers/`+id,{headers:headers})
 .pipe(map(res=>res));
 }
 
@@ -92,13 +94,13 @@ leaveGroup(group_id,user_id):Observable<any>{
   console.log("chat service say user leave gp");
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/leaveGroup/'+group_id,user_id,{headers:headers})
+  return this.http.patch(`${this.url}/api/leaveGroup/`+group_id,user_id,{headers:headers})
   .pipe(map(res=>res));
 }
 getLstMsg(){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.get('http://localhost:3000/api/lastmsg/',{headers:headers}).toPromise();
+  return this.http.get(`${this.url}/api/lastmsg/`,{headers:headers}).toPromise();
 }
 
 //delete whole group chat
@@ -106,7 +108,7 @@ deleteChat(group_id){
   console.log("delete chat serveice",group_id);
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.delete('http://localhost:3000/api/deletechat/'+group_id,{headers:headers}).toPromise();
+  return this.http.delete(`${this.url}/api/deletechat/`+group_id,{headers:headers}).toPromise();
 }
 
 //put last msg
@@ -114,12 +116,12 @@ lastMsgPatch(group_id,msg){
   console.log("delete chat serveice",group_id);
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/putlastmsg/'+group_id,msg,{headers:headers}).toPromise();
+  return this.http.patch(`${this.url}/api/putlastmsg/`+group_id,msg,{headers:headers}).toPromise();
 }
 putGroupNotification(user_id,notification_data){
   let headers=new HttpHeaders();
   headers.append('Content-Type','application/json');
-  return this.http.patch('http://localhost:3000/api/patchGroupNotification/'+user_id,notification_data,{headers:headers}).toPromise();
+  return this.http.patch(`${this.url}/api/patchGroupNotification/`+user_id,notification_data,{headers:headers}).toPromise();
 }
 
 //welcome Msg

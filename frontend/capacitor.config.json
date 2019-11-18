@@ -1,5 +1,5 @@
 {
-  "appId": "com.chat.app",
+  "appId": "com.ionicchat.app",
   "appName": "frontend",
   "bundledWebRuntime": false,
   "npmClient": "npm",

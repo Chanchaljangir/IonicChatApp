@@ -17,7 +17,7 @@ const Group= require('./models/group');
 // var io=require('socket.io')(3000);
 var io=require('socket.io').listen(server);
 const port=3000;
-const hostname = '172.21.177.138';
+// const hostname = '172.17.100.33';
 
 server.listen(port,()=>{
     console.log('server start at port ', port);

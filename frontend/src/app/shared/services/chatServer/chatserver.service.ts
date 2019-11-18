@@ -4,17 +4,20 @@ import * as io from 'socket.io-client';
 import { Observable, observable } from 'rxjs';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 // import {map} from 'rxjs/operators';
+import {environment} from '../../../../environments/environment'; 
 
 @Injectable({ 
   providedIn: 'root'
 })
 export class ChatserverService {
-private socket = io("http://localhost:3000");
+  url = environment.url;
+
+private socket = io(`${this.url}`);
   constructor(private http:HttpClient) { }
   ngOnInit(){
 
   } 
-joinGroup(user,group){
+joinGroup(user,group){ 
   console.log("joinGroup fun", group);
   this.socket.emit('new_joinee',{
     name:user,
