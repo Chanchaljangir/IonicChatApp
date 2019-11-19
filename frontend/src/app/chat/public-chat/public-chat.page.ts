@@ -4,6 +4,7 @@ import { ChatServiceService } from 'src/app/shared/services/chat/chat-service.se
 import { ChatserverService } from 'src/app/shared/services/chatServer/chatserver.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-public-chat',
   templateUrl: './public-chat.page.html',
@@ -52,7 +53,8 @@ export class PublicChatPage implements OnInit {
   checkType: any;
   app_secret: string;
   showEmojiPicker = false;
-  constructor(private chatService:ChatServiceService, private dialogServices:DialogServiceService, private chatserverService:ChatserverService) { }
+  constructor(private chatService:ChatServiceService, private dialogServices:DialogServiceService, private chatserverService:ChatserverService,
+    private router: Router) { }
 
   async ngOnInit() { 
     document.getElementById("chatBlock").style.visibility="hidden";
@@ -265,5 +267,13 @@ async sendMessage(){
     document.getElementById("gpnameHeader").style.visibility="visible";
 
   }
+  //view profile
+viewProfile()
+{
+  this.router.navigate(['/userProfile']);
+} 
+viewGroupProfile(){
+  this.router.navigate(['/friendProfile']);
+}
 }
  

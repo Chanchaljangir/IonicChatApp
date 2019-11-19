@@ -20,12 +20,14 @@ import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material';
 // import { CreateGroupComponent } from './dialog-modules/create-group/create-group.component';
-import { DialogServiceService } from './shared/services/dialogService/dialog-service.service';
 import { DialogModulesModule } from './dialog-modules/dialog-modules.module';
+import { UserProfileComponent } from './shared/profile/user-profile/user-profile.component';
+import { FriendProfileComponent } from './shared/profile/friend-profile/friend-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // import { IconsModule } from 'src/app/icons/icons.module';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,UserProfileComponent,FriendProfileComponent],
   entryComponents: [],
 
   imports: [
@@ -39,7 +41,9 @@ import { DialogModulesModule } from './dialog-modules/dialog-modules.module';
      BrowserAnimationsModule,
      DialogModulesModule,
     //  NoopAnimationsModule,
-     MatButtonModule, MatCheckboxModule,MatMenuModule,MatIconModule,MatDialogModule
+     MatButtonModule, MatCheckboxModule,MatMenuModule,MatIconModule,MatDialogModule,
+     FormsModule,
+     ReactiveFormsModule
     //  IconsModule
   ],
 

@@ -1,0 +1,197 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+ 
+<!-- <head>  -->
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- </head> -->
+
+
+<!-- <hr> -->
+<!-- <div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>User name</h1></div>
+      <div class="col-sm-2"><a href="/users" class="pull-right">
+        <img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a>
+      </div>
+        </div>
+    </div> --> 
+
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons >
+          <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="row">
+    <div class="col-sm-3"><!--left col-->
+    <div class="text-center">
+        <form class="form" [formGroup]="ImgForm">
+      <ng-container *ngIf="image;else defaultImg">
+      <img src="{{image}}" class="avatar img-circle img-thumbnail" alt="avatar">
+      <!-- <img src="{{image}}" alt="user Image" class="avatar img-circle img-thumbnail"> -->
+    </ng-container>
+    <ng-template #defaultImg>
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+    </ng-template>
+      <h6>Upload a different photo...</h6>
+      
+      <!-- <ng-picker-overlay
+                    [apikey]="apikey"
+                    (uploadSuccess)="onUploadSuccess($event)"
+                    (uploadError)="onUploadError($event)">
+                    <button type="submit">upload</button>
+      </ng-picker-overlay> -->
+      <input type="file" class="text-center center-block file-upload" style="display: none;" #uploadImg (change)="onFileSelected($event)">
+      <button class="text-center center-block file-upload" type="submit" (click)="uploadImg.click()">Upload Image</button>
+      <button type="submit" (click)="onUplaodImage()">Click for Upload Image</button>
+      </form>
+  </div>
+<!-- </hr> -->
+<br>
+
+             
+        <!-- <div class="panel panel-default">
+          <div class="panel-heading">Home <i class="fa fa-link fa-1x"></i></div>
+          <div class="panel-body"><b (click)="goBack()" style="color: blue">Go back</b></div>
+        </div> -->
+        
+        
+      </div><!--/col-3-->
+    <div class="col-sm-9">
+          <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#home">User Profile</a></li>
+              <li><a data-toggle="tab" href="#changePassword">Change Password</a></li>
+            </ul>
+
+             
+        <div class="tab-content">
+          <div class="tab-pane active" id="home"> 
+              <hr>
+                <form class="form" action="##" method="post" id="registrationForm" [formGroup]="userProfileForm" (submit)="SubmitProfileForm()">
+                    <div class="form-group">
+                         
+                        <div class="col-xs-6">
+                            <label for="Firstname"><h4>User Name<sup>*</sup></h4></label>
+                            <input type="text" formControlName="username" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any." 
+                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                            <!-- <span *ngIf="!userProfileForm.get('username').valid && userProfileForm.get('username').touched" class="spanVaild">Enter Your First Name less then 25 characters</span> -->
+                            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                              <div *ngIf="f.username.errors.required">Enter Your First Name less then 25 characters</div>
+                            </div>
+                          </div>
+                    </div>
+        
+                    <div class="form-group">
+                        
+                        <div class="col-xs-6">
+                            <label for="phone"><h4>Phone</h4></label>
+                            <input type="number" formControlName="phone" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                            </div>
+                  </div>
+                    <div class="form-group">
+                        
+                        <div class="col-xs-6">
+                            <label for="email"><h4>Email<sup>*</sup></h4></label>
+                            <input type="email" formControlName="email" class="form-control" name="email" 
+                            id="email" placeholder="you@email.com" title="enter your email." disabled>
+                            </div>
+                  </div>
+                    <div class="form-group">
+                        
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Location</h4></label>
+                            <input type="text" formControlName="location" class="form-control" id="location" 
+                            placeholder="Enter a location" title="enter a location">
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        
+                      <div class="col-xs-6"> 
+                          <label for="chattype"><h4>Chat Type</h4></label>
+                          <select class="form-control" formControlName="chattype" [(ngModel)]="chat" style="height: calc(3.25rem + 2px);"> 
+                              <option [ngValue]="undefined" disabled selected>Chat Category</option>
+                              <option value="private">Private Chat</option>
+                              <option value="public">Public Chat</option>
+                          </select>
+                      </div>
+                  </div> -->
+          
+          <div class="form-group">
+                        
+          <div class="col-xs-12">
+            <label for="status"><h4>Status</h4></label>
+            <textarea rows="7" cols="60" class="form-control" id="status" formControlName="status" placeholder="Write any Status" title="Write any Status">
+                      </textarea>
+                          </div>
+                  </div>
+                  
+                    <div class="form-group">
+                         <div class="col-xs-12">
+                              <br>
+                              <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>&nbsp;&nbsp;
+                               <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                          </div>
+                    </div>
+              </form>
+            
+            <hr>
+            
+           </div>
+           <!--/tab-pane-->
+
+      <!-- Password Panal -->
+      <div class="tab-pane" id="changePassword">
+
+             <hr>
+                <form class="form" method="post" id="changePasswordForm" [formGroup]="passwordForm" (submit)="passwordSubmitForm()">
+        <div class="form-group">     
+                        <div class="col-xs-6">
+                            <label for="password"><h4>New Password<sup>*</sup></h4></label>
+                            <input type="password" class="form-control" formControlName="password" name="password" id="newpassword" 
+                            [ngClass]="{ 'is-invalid': submitted && p.password.errors }" placeholder="Enter your New Password" title="Enter your New Password">
+                            <div *ngIf="submitted && p.password.errors" class="invalid-feedback">
+                                <div *ngIf="p.password.errors.required">Enter Your New Password length between 6 to 15</div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="col-xs-6">
+                          <label for="password2"><h4>Re-Type Password<sup>*</sup></h4></label>
+                            <input type="password" class="form-control" formControlName="repassword" name="password2" id="password2" 
+                            [ngClass]="{ 'is-invalid': submitted && p.repassword.errors }" placeholder="Re-Type your password" title="Re-Type your password">
+                            <div *ngIf="submitted && p.repassword.errors" class="invalid-feedback">
+                                <div *ngIf="p.repassword.errors.required">Password must match</div>
+                              </div>
+                            <span *ngIf="!passwordForm.get('repassword').valid && passwordForm.get('repassword').touched" class="spanVaild">Password must match</span>
+                   
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <div class="col-xs-12">
+                              <br>
+                              <button class="btn btn-lg btn-success" type="submit" ><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                               <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                          </div>
+                    </div>
+              </form>
+             
+           
+             
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+
+      </div><!--/col-9-->
+  </div><!--/row-->
+</ion-content>
+ 
+                                                       
