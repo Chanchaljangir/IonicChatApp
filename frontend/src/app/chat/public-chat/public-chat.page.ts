@@ -44,7 +44,7 @@ export class PublicChatPage implements OnInit {
   typingUser_id: any;
   // getNotification:any[];
   // msgseen:boolean;
-  apikey: string;
+  apikey: string; 
   onSuccess: (res: any) => void;
   onError: (err: any) => void;
   uploadFileUrl: any;

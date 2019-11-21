@@ -22,6 +22,24 @@ body,html{
     height: 100vh;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    
+}
+.input-group{
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 16px !important;
+}
+.sc-ion-searchbar-md-h{
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 8px;
+  padding-inline-start: 8px;
+  -webkit-padding-end: 8px;
+  padding-inline-end: 8px;
+  padding-left: 0 !important;
 }
 .card{
     height: 500px;
@@ -569,3 +587,12 @@ margin-bottom: 15px !important;
       .msg_head{
       position: relative;
       }
+    //   .input-group{
+    //     position: relative;
+    // /* display: table; */
+    // /* border-collapse: separate; */
+    // /* padding-left: 0 !important; */
+    // /* margin-left: 0 !important; */
+    // /* padding-right: 16px !important; */
+    // padding-bottom: 25px !important;
+    //   }
