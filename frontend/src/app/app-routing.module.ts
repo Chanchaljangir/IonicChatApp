@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'groupchat', loadChildren: './chat/group-chat/group-chat.module#GroupChatPageModule' },
   { path: 'publicchat', loadChildren: './chat/public-chat/public-chat.module#PublicChatPageModule' },
   {path: 'userProfile' ,component: UserProfileComponent},
-  {path:'friprofile', component: FriendProfileComponent}
+  {path:'friendProfile', component: FriendProfileComponent}
 ];
  console.log("app routing module@@@@@@@@@");
 @NgModule({

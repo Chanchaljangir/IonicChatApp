@@ -32,14 +32,14 @@
 
       <div id="chatHeader" style="display: inline-block;">
           <div class="card-header msg_head">
-              <div class="d-flex bd-highlight">
+              <div class="d-flex bd-highlight" (click)="viewGroupProfile()">
                 <div class="img_cont">
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">
                   <span class="online_icon"></span>
                 </div>
                 <div class="">
                   <span>{{selectedGroup_name}}</span>
-                  <p>1767 Messages</p>
+                  <!-- <p>1767 Messages</p> -->
                 </div>
               </div>
             </div>

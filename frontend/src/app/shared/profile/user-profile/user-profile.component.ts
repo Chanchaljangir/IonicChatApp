@@ -177,6 +177,7 @@ else{
 //go back to chat
 goBack(){  
   this._location.back(); 
+  // this.router.navigate(['/publicchat']);
 }
 
 //select Image

@@ -5,6 +5,7 @@ import { ChatserverService } from 'src/app/shared/services/chatServer/chatserver
 import { FormGroup, FormControl } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ProfileServiceService } from 'src/app/shared/services/profile/profile-service.service';
 @Component({
   selector: 'app-public-chat',
   templateUrl: './public-chat.page.html',
@@ -54,7 +55,7 @@ export class PublicChatPage implements OnInit {
   app_secret: string;
   showEmojiPicker = false;
   constructor(private chatService:ChatServiceService, private dialogServices:DialogServiceService, private chatserverService:ChatserverService,
-    private router: Router) { }
+    private router: Router, private profileService: ProfileServiceService) { }
 
   async ngOnInit() { 
     document.getElementById("chatBlock").style.visibility="hidden";
@@ -197,7 +198,7 @@ private getAllGroups(){
 
  // choose group
  async chooseGroup(selectGroup_name, selectGroup_id){
-  // this.profileService.groupData(selectGroup_id,selectGroup_name);
+  this.profileService.groupData(selectGroup_id,selectGroup_name);
   //  document.getElementById("joinGroupDialog").style.visibility="visible";
     // alert("U relly want to join this group");
     console.log("selected gp name is ", selectGroup_name," and id is ", selectGroup_id);

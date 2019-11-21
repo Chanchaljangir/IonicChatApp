@@ -1,3 +1,53 @@
-<p>
-  friend-profile works!
-</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+  
+        <title>View Friends Profile</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+    <ion-header>
+      <ion-toolbar class="header-background-color">
+          <ion-buttons class="header-btn">
+              <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+              Go Back 
+            </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+        <div class="border border-info">
+           <div class="text-center">
+            <div class="imgclass">
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">   
+            </div>
+
+            <!-- group members details -->
+            <div class="groupClass"> 
+                <h2>{{group_name}}</h2>
+                <h4 *ngFor="let createdby of groupCreatedBy"><label>Created By:</label>
+
+                    {{createdby.createdBy}}
+                
+                <h3>Group Members are: </h3>
+                <h4 *ngFor="let member of groupMembersName">
+                        {{member.memberName}}     
+            </h4></h4>
+            </div>
+
+            <!-- friend details -->
+            <div class="friendsClass">
+                <h2>{{friend_name}}</h2>
+                <div *ngFor="let friend of user">
+                <h3>Location: <label>{{friend[0].location}}</label></h3>
+                <h3>Phone: <label>{{friend[0].phone}}</label></h3>
+                <h3>Status: <label>{{friend[0].status}}</label></h3>
+            </div>
+            </div>
+    </div>
+</div>
+</ion-content>
