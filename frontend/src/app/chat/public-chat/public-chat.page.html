@@ -95,7 +95,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text search_btn"><i class="fas fa-search" (click)="search()"></i></span>
             </div> -->
-            <ion-searchbar></ion-searchbar>
+            <ion-searchbar [(ngModel)]="filterText"></ion-searchbar>
           </div> 
         </div> 
         <div class="card-body contacts_body">
@@ -104,7 +104,7 @@
         
             <ion-list>
 
-          <ion-item *ngFor="let group of groups">
+          <ion-item *ngFor="let group of groups | mypipe:filterText">
             <div class="d-flex bd-highlight" *ngIf="!group.private" (click)="chooseGroup(group.groupName, group._id)">
               <div class="img_cont">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">

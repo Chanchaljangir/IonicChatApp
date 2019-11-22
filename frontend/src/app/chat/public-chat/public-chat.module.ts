@@ -9,6 +9,7 @@ import { PublicChatPage } from './public-chat.page';
 import { MaterialModule } from 'src/app/material.module';
 // import { CreateGroupComponent } from 'src/app/dialog-modules/create-group/create-group.component';
 import { MatDialogModule } from '@angular/material';
+import { MyPipeModule } from 'src/app/shared/services/my-pipe/my-pipe.module';
 
 
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -33,7 +34,8 @@ const routes: Routes = [
     RouterModule.forChild(routes), 
     MaterialModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MyPipeModule
     // BrowserAnimationsModule,
     // NoopAnimationsModule,
     // MatButtonModule, MatCheckboxModule,MatMenuModule,MatIconModule

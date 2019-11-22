@@ -24,6 +24,7 @@ import { DialogModulesModule } from './dialog-modules/dialog-modules.module';
 import { UserProfileComponent } from './shared/profile/user-profile/user-profile.component';
 import { FriendProfileComponent } from './shared/profile/friend-profile/friend-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyPipeModule } from './shared/services/my-pipe/my-pipe.module';
 
 // import { IconsModule } from 'src/app/icons/icons.module';
 @NgModule({
@@ -43,7 +44,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     //  NoopAnimationsModule,
      MatButtonModule, MatCheckboxModule,MatMenuModule,MatIconModule,MatDialogModule,
      FormsModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+     MyPipeModule
     //  IconsModule
   ],
 
