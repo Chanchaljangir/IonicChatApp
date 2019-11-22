@@ -217,7 +217,7 @@ private getAllGroups(){
              this.check=true;
             }  
         } 
-        if(this.check){
+        if(this.check){ 
           document.getElementById("chatBlock").style.visibility="visible";
           document.getElementById("chatHeader").style.visibility="visible";
           document.getElementById("groupinfoBlock").style.visibility="hidden";
@@ -268,6 +268,19 @@ async sendMessage(){
     document.getElementById("gpnameHeader").style.visibility="visible";
 
   }
+//logout user
+  logout(){
+    this.chatService.logout();
+    this.router.navigate(['/auth/login']);
+    return false;
+  }
+  
+//delete whole chat
+async deleteChat(){
+  console.log("inside deleteChat", this.selectedGroup_id);
+let deletechat= await this.chatService.deleteChat(this.selectedGroup_id);
+console.log("deletechat ",deletechat);
+}
   //view profile
 viewProfile()
 {

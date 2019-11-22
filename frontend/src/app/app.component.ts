@@ -15,17 +15,23 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,private router:Router
-  ) {
+  ) { 
     this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(() => { 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
-  public_chat(){
-this.router.navigate(['public-chat']);
+  publicChat(){
+    this.router.navigate(['/publicchat']);
+  }
+  privateChat(){
+    this.router.navigate(['privatechat']);
+  }
+  groupChat(){
+    this.router.navigate(['groupchat']);
   }
 }

@@ -1,12 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>privateChat</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
@@ -28,17 +19,73 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title class="welcome" slot="start">
+    <ion-title class="welcome">
+      <!-- back button -->
+      <div class="backbtn">
+            <ion-buttons >
+                <ion-back-button defaultHref="/publicchat" (click)="backButtonPressed()"></ion-back-button>
+              </ion-buttons>
+        </div>
+        <div id="gpnameHeader" style="display: inline-block; position: absolute;padding-bottom: 20px;
+        padding-top: 20px;">
       <ion-label>Welcome in Public Chat</ion-label>
+        </div>
+
+      <div id="chatHeader" style="display: inline-block;">
+          <div class="card-header msg_head">
+              <div class="d-flex bd-highlight" (click)="viewGroupProfile()">
+                <div class="img_cont">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">
+                  <span class="online_icon"></span>
+                </div>
+                <div class="">
+                  <span>{{selectedGroup_name}}</span>
+                  <!-- <p>1767 Messages</p> -->
+                </div>
+              </div>
+            </div>
+      </div>
+
+      <div class="ion-float-end">
+          <button mat-icon-button [matMenuTriggerFor]="menu" style="background-color: white;">
+            <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item style="background-color: white;">
+               <mat-icon (click)="viewProfile()">perm_identity</mat-icon>
+              <span (click)="viewProfile()">View Profile</span>
+            </button> 
+            <button mat-menu-item (click)="openDialog()" style="background-color: white;">
+              <mat-icon>group_add</mat-icon>
+                <span>Create Group</span>
+            </button>
+            <button mat-menu-item *ngIf="this.checkGpAvaliabl" (click)="leave()" style="background-color: white;">
+                <mat-icon>person_add_disabled</mat-icon>
+                <span>Leave Group</span>
+            </button>
+            <button mat-menu-item style="background-color: white;">
+                <mat-icon (click)="deleteChat()">delete_outline</mat-icon>
+                <span (click)="deleteChat()">Delete Chat</span>
+            </button>
+            <button mat-menu-item (click)=logout() style="background-color: white;">
+              <mat-icon>power_settings_new</mat-icon>
+              <span>Log Out</span>
+            </button>  
+            </mat-menu>
+        </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<!-- <div id="chatHeader">
+  <ion-header>
+    <h1>aaa</h1>
+  </ion-header>
+</div> -->
+<ion-content class="ion-padding">
 
   <!-- <label class="welcome">Welcome in Public Chat</label> -->
 
-  <div class="container-fluid h-100">
+  <div class="container-fluid h-100" id="groupinfoBlock">
     <div class="row justify-content-center h-100">
       <div class="col-md-4 col-xl-3 chat">
         <div class="card mb-sm-3 mb-md-0 contacts_card">
@@ -56,15 +103,16 @@
           <div class="contacts">
         
             <ion-list>
-          <ion-item>
-            <div class="d-flex bd-highlight">
+
+          <ion-item *ngFor="let group of groups">
+            <div class="d-flex bd-highlight" *ngIf="!group.private" (click)="chooseGroup(group.groupName, group._id)">
               <div class="img_cont">
-                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
-                <span class="online_icon"></span>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">
+                <!-- <span class="online_icon"></span> -->
               </div>
-              <div class="user_info">
-                <span>Yolduz Rafi</span>
-                <p>Yolduz is online</p>
+              <div class="">
+                  <span>{{group.groupName}}</span>
+                  <p>{{group.lastmsg}}</p>
               </div>
             </div>
           </ion-item>
@@ -74,21 +122,9 @@
                 <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
                 <span class="online_icon"></span>
               </div>
-              <div class="user_info">
+              <div class="">
                 <span>Yolduz Rafi</span>
                 <p>Yolduz is online</p>
-              </div>
-            </div>
-          </ion-item>
-          <ion-item>
-            <div class="d-flex bd-highlight">
-              <div class="img_cont">
-                <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
-                <span class="online_icon"></span>
-              </div>
-              <div class="user_info">
-                <span>Yolduz Rafi</span>
-                <p>Yolduz is online</p> 
               </div>
             </div>
           </ion-item>
@@ -99,5 +135,181 @@
       </div>
     </div>
     </div>
+  </div>
+
+
+
+  <div id="chatBlock">
+ 
+          <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100">
+          
+              <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                  <div class="card-body msg_card_body">
+
+                    <!-- get old chat msg -->
+			<div *ngFor="let oldmsg of getmsg">
+					<div *ngIf="oldmsg[0].groupId === selectedGroup_id">	
+				<div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===oldmsg[0].fromUser;else sendmsg">
+						<label class="toUserName">You</label>	
+								<div class="msg_cotainer_send" (click)="openDocument(oldmsg[0].msg)">
+										<ng-container *ngIf="oldmsg[0].msgType === 'jpg'||oldmsg[0].msgType=== 'jpeg'||oldmsg[0].msgType ==='png'||oldmsg[0].msgType ==='gif';else textPDF">
+												<img src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)"><br>
+												<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+												<!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+											</ng-container>
+											<ng-template #textPDF>
+												<ng-container *ngIf="oldmsg[0].msgType === 'txt'|| oldmsg[0].msgType === 'pdf';else audio" (click)="openDocument(oldmsg[0].msg)">
+														<iframe  (click)="openDocument(oldmsg[0].msg)" width="100%" height="100%" name="plugin" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg[0].msg)' type="application/pdf"></iframe>
+														<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+														<!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+														<!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+														<!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg[0].msg}}" type=""> -->
+												</ng-container>
+											</ng-template>
+											<ng-template #audio>
+													<ng-container *ngIf="oldmsg[0].msgType === 'mp3'||oldmsg[0].msgType === 'mid';else video">
+															<!-- <h1>audio..</h1> -->
+															<audio controls (click)="openDocument(oldmsg[0].msg)">
+																<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
+															</audio>
+														</ng-container>
+											</ng-template>
+											<ng-template #video>
+												<ng-container *ngIf="oldmsg[0].msgType === 'mp4';else plaintxt">
+													<video controls (click)="openDocument(oldmsg[0].msg)">
+														<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
+													</video>
+												</ng-container>
+											</ng-template>
+											<ng-template #plaintxt>
+													{{oldmsg[0].msg}}
+												</ng-template>
+											<br>
+											<!-- <span class="msg_time_send">{{oldmsg[0].Date| date:'medium'}}</span> -->
+											<span class="msg_time_send_by_me">{{oldmsg[0].Date| date:'medium'}}</span>
+										</div>
+									
+									<div class="img_cont_msg">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
+									</div>
+				<!-- <span class="msg_time_send">11 sep 2019</span> -->
+				</div>
+				 <ng-template #sendmsg>
+						<div class="d-flex justify-content-start mb-4" >
+									<div class="img_cont_msg">
+										<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
+									</div>
+									<div class="msg_cotainer" (click)="openDocument(oldmsg[0].msg)">
+											<ng-container *ngIf="oldmsg[0].msgType === 'jpg'||oldmsg[0].msgType=== 'jpeg'||oldmsg[0].msgType ==='png'||oldmsg[0].msgType ==='gif';else textPDF">
+													<img src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)"><br>
+													<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+													<!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+												</ng-container>
+												<ng-template #textPDF>
+													<ng-container *ngIf="oldmsg[0].msgType === 'txt'|| oldmsg[0].msgType === 'pdf';else audio" (click)="openDocument(oldmsg[0].msg)">
+															<iframe  (click)="openDocument(oldmsg[0].msg)" width="100%" height="100%" name="plugin" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg[0].msg)' type="application/pdf"></iframe>
+															<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+															<!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+															<!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+															<!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg[0].msg}}" type=""> -->
+													</ng-container>
+												</ng-template>
+												<ng-template #audio>
+														<ng-container *ngIf="oldmsg[0].msgType === 'mp3'||oldmsg[0].msgType === 'mid';else video">
+																<!-- <h1>audio..</h1> -->
+																<audio controls (click)="openDocument(oldmsg[0].msg)">
+																	<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
+																</audio>
+															</ng-container>
+												</ng-template>
+												<ng-template #video>
+													<ng-container *ngIf="oldmsg[0].msgType === 'mp4';else plaintxt">
+														<video controls (click)="openDocument(oldmsg[0].msg)">
+															<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
+														</video>
+													</ng-container>
+												</ng-template>
+												<ng-template #plaintxt>
+														{{oldmsg[0].msg}}
+													</ng-template>
+										<br>
+											<span class="msg_time_by_me">{{oldmsg[0].Date| date:'medium'}}</span>
+									</div>
+									<label class="fromUserName">~{{oldmsg.username}}</label>	
+				</div>
+				</ng-template> 
+				</div>
+              </div>
+              
+      <!-- start chatting	-->
+                  <ng-container *ngIf="selectedGroup_id">
+                          <div *ngFor="let chat of msgList">	
+                          <div *ngIf="chat.group_id === selectedGroup_id || chat.toUser === selectedFriend_id">	
+
+                      <div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===chat.user || this.user.id===chat.user_id;else sendmsg">
+                          <label class="toUserName">You</label>  
+                            <div class="msg_cotainer_send">
+                                {{chat.msg}}
+                            <span class="msg_time_send_by_me">{{chat.date| date:'medium'}}</span>
+                          </div>    
+                          <div class="img_cont_msg">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
+                          </div>
+                        </div>
+
+                <ng-template #sendmsg>
+                    <div class="d-flex justify-content-start mb-4">
+                      <div class="img_cont_msg">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
+                      </div>
+                      <div class="msg_cotainer">
+                          {{chat.msg}}
+                        <span class="msg_time_by_me">{{chat.date| date:'medium'}}</span>
+                      </div>
+                    </div>
+                </ng-template>
+                          </div>
+                          </div>
+                          </ng-container>
+
+                          <!-- <div class="d-flex justify-content-start mb-4">
+                              <div class="img_cont_msg">
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                              </div>
+                              <div class="msg_cotainer">
+                                Hi, how are you samim?
+                                <span class="msg_time">8:40 AM, Today</span>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-end mb-4">
+                              <div class="msg_cotainer_send">
+                                Hi Khalid i am good tnx how about you?
+                                <span class="msg_time_send">8:55 AM, Today</span>
+                              </div>
+                              <div class="img_cont_msg">
+                            <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img_msg">
+                              </div>
+                            </div> -->
+
+                  </div>
+                  <div class="card-footer" style="padding-left: 0 !important;padding-right: 0 !important;">
+                    <div class="input-group" style="padding-bottom: 25px !important;display: flex;">
+                      <div class="input-group-append">
+                        <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                      </div>
+                      <textarea [(ngModel)]="textValue" #message="ngModel" name="" id="msgTextarea" class="form-control type_msg" placeholder="Type your message..." [(ngModel)]="msg"></textarea>
+                      <!-- <mat-icon class="emoji_icon" (click)="toggleEmojiPicker()">tag_faces</mat-icon> -->
+                      <div class="input-group-append" (click)="sendMessage()" onclick=" document.getElementById('msgTextarea').value = ''">
+                        <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </div> 
+      
   </div>
 </ion-content>
