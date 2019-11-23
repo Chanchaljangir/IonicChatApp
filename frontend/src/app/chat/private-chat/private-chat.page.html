@@ -23,12 +23,12 @@
       <!-- back button -->
       <div class="backbtn">
             <ion-buttons >
-                <ion-back-button defaultHref="/publicchat" (click)="backButtonPressed()"></ion-back-button>
+                <ion-back-button defaultHref="/privatecchat" (click)="backButtonPressed()"></ion-back-button>
               </ion-buttons>
         </div>
         <div id="gpnameHeader" style="display: inline-block; position: absolute;padding-bottom: 20px;
         padding-top: 20px;">
-      <ion-label>Welcome in Public Chat</ion-label>
+      <ion-label>Welcome in Private Chat</ion-label>
         </div>
 
       <div id="chatHeader" style="display: inline-block;">
@@ -39,7 +39,7 @@
                   <span class="online_icon"></span>
                 </div>
                 <div class="">
-                  <span>{{selectedGroup_name}}</span>
+                  <span>gp name</span>
                   <!-- <p>1767 Messages</p> -->
                 </div>
               </div>
@@ -104,15 +104,31 @@
         
             <ion-list>
 
-          <ion-item *ngFor="let group of groups">
-            <div class="d-flex bd-highlight" *ngIf="!group.private" (click)="chooseGroup(group.groupName, group._id)">
+          <ion-item *ngFor="let puser of users; let i=index">
+            <div class="d-flex bd-highlight" *ngIf="!(puser._id === this.user.id)" (click)="chooseUser(puser.username, puser._id)">
               <div class="img_cont">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img">
-                <!-- <span class="online_icon"></span> -->
+                <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
+                <!-- <ng-container *ngFor="let online of OnlineUsers"> -->
+                  <ng-container *ngIf="puser.online;else offlineUser">
+                    <span class="online_icon online"></span>
+                    
+                  </ng-container>
+                  <ng-template #offlineUser>
+                    <span class="online_icon offline"></span>
+                  </ng-template>
+                <!-- </ng-container> -->
+
               </div>
-              <div class="">
-                  <span>{{group.groupName}}</span>
-                  <p>{{group.lastmsg}}</p>
+              <div class="user_info">
+                <span>{{puser.username}}</span>
+                <!-- <p>Sahar left 7 mins ago</p> -->
+              </div>
+              <div class="notification" *ngFor="let notify of getNotification; let i=index">
+                <ng-container *ngIf="notify.toUser===this.user.id && notify.fromUser===puser._id">
+                  <span class="badge" *ngIf="msgseen">
+                    {{notify.notification}} 
+                  </span>
+                </ng-container>
               </div>
             </div>
           </ion-item>
@@ -148,131 +164,228 @@
                 <div class="card">
                   <div class="card-body msg_card_body">
 
-                    <!-- get old chat msg -->
-			<div *ngFor="let oldmsg of getmsg">
-					<div *ngIf="oldmsg[0].groupId === selectedGroup_id">	
-				<div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===oldmsg[0].fromUser;else sendmsg">
-						<label class="toUserName">You</label>	
-								<div class="msg_cotainer_send" (click)="openDocument(oldmsg[0].msg)">
-										<ng-container *ngIf="oldmsg[0].msgType === 'jpg'||oldmsg[0].msgType=== 'jpeg'||oldmsg[0].msgType ==='png'||oldmsg[0].msgType ==='gif';else textPDF">
-												<img src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)"><br>
-												<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
-												<!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
-											</ng-container>
-											<ng-template #textPDF>
-												<ng-container *ngIf="oldmsg[0].msgType === 'txt'|| oldmsg[0].msgType === 'pdf';else audio" (click)="openDocument(oldmsg[0].msg)">
-														<iframe  (click)="openDocument(oldmsg[0].msg)" width="100%" height="100%" name="plugin" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg[0].msg)' type="application/pdf"></iframe>
-														<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
-														<!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
-														<!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
-														<!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg[0].msg}}" type=""> -->
-												</ng-container>
-											</ng-template>
-											<ng-template #audio>
-													<ng-container *ngIf="oldmsg[0].msgType === 'mp3'||oldmsg[0].msgType === 'mid';else video">
-															<!-- <h1>audio..</h1> -->
-															<audio controls (click)="openDocument(oldmsg[0].msg)">
-																<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
-															</audio>
-														</ng-container>
-											</ng-template>
-											<ng-template #video>
-												<ng-container *ngIf="oldmsg[0].msgType === 'mp4';else plaintxt">
-													<video controls (click)="openDocument(oldmsg[0].msg)">
-														<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
-													</video>
-												</ng-container>
-											</ng-template>
-											<ng-template #plaintxt>
-													{{oldmsg[0].msg}}
-												</ng-template>
-											<br>
-											<!-- <span class="msg_time_send">{{oldmsg[0].Date| date:'medium'}}</span> -->
-											<span class="msg_time_send_by_me">{{oldmsg[0].Date| date:'medium'}}</span>
-										</div>
-									
-									<div class="img_cont_msg">
-								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
-									</div>
-				<!-- <span class="msg_time_send">11 sep 2019</span> -->
-				</div>
-				 <ng-template #sendmsg>
-						<div class="d-flex justify-content-start mb-4" >
-									<div class="img_cont_msg">
-										<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
-									</div>
-									<div class="msg_cotainer" (click)="openDocument(oldmsg[0].msg)">
-											<ng-container *ngIf="oldmsg[0].msgType === 'jpg'||oldmsg[0].msgType=== 'jpeg'||oldmsg[0].msgType ==='png'||oldmsg[0].msgType ==='gif';else textPDF">
-													<img src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)"><br>
-													<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
-													<!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
-												</ng-container>
-												<ng-template #textPDF>
-													<ng-container *ngIf="oldmsg[0].msgType === 'txt'|| oldmsg[0].msgType === 'pdf';else audio" (click)="openDocument(oldmsg[0].msg)">
-															<iframe  (click)="openDocument(oldmsg[0].msg)" width="100%" height="100%" name="plugin" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg[0].msg)' type="application/pdf"></iframe>
-															<button class="downloadbtn" (click)="openDocument(oldmsg[0].msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
-															<!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg[0].msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
-															<!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
-															<!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg[0].msg}}" type=""> -->
-													</ng-container>
-												</ng-template>
-												<ng-template #audio>
-														<ng-container *ngIf="oldmsg[0].msgType === 'mp3'||oldmsg[0].msgType === 'mid';else video">
-																<!-- <h1>audio..</h1> -->
-																<audio controls (click)="openDocument(oldmsg[0].msg)">
-																	<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
-																</audio>
-															</ng-container>
-												</ng-template>
-												<ng-template #video>
-													<ng-container *ngIf="oldmsg[0].msgType === 'mp4';else plaintxt">
-														<video controls (click)="openDocument(oldmsg[0].msg)">
-															<source src="{{oldmsg[0].msg}}" (click)="openDocument(oldmsg[0].msg)">
-														</video>
-													</ng-container>
-												</ng-template>
-												<ng-template #plaintxt>
-														{{oldmsg[0].msg}}
-													</ng-template>
-										<br>
-											<span class="msg_time_by_me">{{oldmsg[0].Date| date:'medium'}}</span>
-									</div>
-									<label class="fromUserName">~{{oldmsg.username}}</label>	
-				</div>
-				</ng-template> 
-				</div>
-              </div>
-              
-      <!-- start chatting	-->
-                  <ng-container *ngIf="selectedGroup_id">
-                          <div *ngFor="let chat of msgList">	
-                          <div *ngIf="chat.group_id === selectedGroup_id || chat.toUser === selectedFriend_id">	
+                   	<!-- chat div's -->
+						<div *ngFor="let recReq of receiveReq" class="mainchatdiv">
+              <!-- start chat -->
+          <div *ngIf="recReq.status === true && ((recReq.user_id === user.id || user.id === recReq.friend_id)
+          && (selectedFri_id === recReq.friend_id || selectedFri_id === recReq.user_id)); else confirmReq">
+      <div id="startchatdiv">
+        <div class="card-body msg_card_body">
 
-                      <div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===chat.user || this.user.id===chat.user_id;else sendmsg">
-                          <label class="toUserName">You</label>  
-                            <div class="msg_cotainer_send">
-                                {{chat.msg}}
-                            <span class="msg_time_send_by_me">{{chat.date| date:'medium'}}</span>
-                          </div>    
-                          <div class="img_cont_msg">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
-                          </div>
-                        </div>
-
-                <ng-template #sendmsg>
-                    <div class="d-flex justify-content-start mb-4">
-                      <div class="img_cont_msg">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjOn12lScs8BoFpcmlH3DMJ8xEdVMAkH1yvAS0b1IJV9vjmrEl" class="rounded-circle user_img_msg">
+          <!-- get old msg -->
+          <div *ngFor="let oldmsg of getmsg">
+            <div *ngIf="(oldmsg.toUser === selectedFri_id && oldmsg.fromUser === user.id) || (oldmsg.fromUser === selectedFri_id && oldmsg.toUser === user.id)">		
+          <div class="d-flex justify-content-end mb-4" *ngIf="this.user.id===oldmsg.fromUser;else sendmsg">
+                  <div class="msg_cotainer_send" (click)="openDocument(oldmsg.msg)">
+                    <ng-container *ngIf="oldmsg.msgType === 'jpg'||oldmsg.msgType=== 'jpeg'||oldmsg.msgType ==='png'||oldmsg.msgType ==='gif';else textPDF" (click)="openDocument(oldmsg.msg)">
+                      <img src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)"><br>
+                      <button class="downloadbtn" (click)="openDocument(oldmsg.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                      <!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                    </ng-container>
+                    <ng-template #textPDF>
+                      <ng-container *ngIf="oldmsg.msgType === 'txt'|| oldmsg.msgType === 'pdf';else audio" (click)="openDocument(oldmsg.msg)">
+                          <iframe width="100%" height="100%" name="plugin" id="plugin" (click)="openDocument(oldmsg.msg)" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg.msg)' type="application/pdf"></iframe>
+                          <button class="downloadbtn" (click)="openDocument(oldmsg.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                          <!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                          <!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+                          <!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg.msg}}" type=""> -->
+                      </ng-container>
+                    </ng-template>
+                    <ng-template #audio>
+                      <ng-container *ngIf="oldmsg.msgType === 'mp3'||oldmsg.msgType === 'mid';else video">
+                          <audio controls (click)="openDocument(oldmsg.msg)">
+                            <source src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)">
+                          </audio>
+                        </ng-container>
+                  </ng-template>
+                  <ng-template #video>
+                    <ng-container *ngIf="oldmsg.msgType === 'mp4';else plaintxt">
+                      <video controls (click)="openDocument(oldmsg.msg)">
+                        <source src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)">
+                      </video>
+                    </ng-container>
+                  </ng-template>
+                    <ng-template #plaintxt>
+                        {{oldmsg.msg}}
+                      </ng-template>
+                        <br>
+                        <span class="msg_time_send_by_me">{{oldmsg.Date| date:'short'}}</span>
                       </div>
-                      <div class="msg_cotainer">
-                          {{chat.msg}}
-                        <span class="msg_time_by_me">{{chat.date| date:'medium'}}</span>
-                      </div>
+                    
+                    <div class="img_cont_msg">
+                  <img src="" class="rounded-circle user_img_msg">
                     </div>
-                </ng-template>
-                          </div>
-                          </div>
+          </div>
+          <ng-template #sendmsg>
+              <div class="d-flex justify-content-start mb-4" >
+                    <div class="img_cont_msg">
+                      <img src="https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer" (click)="openDocument(oldmsg.msg)">
+                      <ng-container *ngIf="oldmsg.msgType === 'jpg'||oldmsg.msgType=== 'jpeg'||oldmsg.msgType ==='png'||oldmsg.msgType ==='gif';else textPDF">
+                        <img src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)"><br>
+                        <button class="downloadbtn" (click)="openDocument(oldmsg.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                        <!-- <button type="submit" class="downloadbtn" (click)="downloadImg(oldmsg.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                      </ng-container>
+                      <ng-template #textPDF>
+                        <ng-container *ngIf="oldmsg.msgType === 'txt'|| oldmsg.msgType === 'pdf';else audio">
+                            <iframe width="100%" height="100%" name="plugin" id="plugin" (click)="openDocument(oldmsg.msg)" [src]='sanitizer.bypassSecurityTrustResourceUrl(oldmsg.msg)' type="application/pdf"></iframe>
+                            <button class="downloadbtn" (click)="openDocument(oldmsg.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                            <!-- <button class="downloadbtn" (click)="downloaddoc(oldmsg.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                            <!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+                            <!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{oldmsg.msg}}" type=""> -->
+                        </ng-container>
+                      </ng-template>
+                      <ng-template #audio>
+                        <ng-container *ngIf="oldmsg.msgType === 'mp3'||oldmsg.msgType === 'mid';else video">
+                            <audio controls (click)="openDocument(oldmsg.msg)">
+                              <source src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)">
+                            </audio>
                           </ng-container>
+                    </ng-template>
+                    <ng-template #video>
+                      <ng-container *ngIf="oldmsg.msgType === 'mp4';else plaintxt">
+                        <video controls (click)="openDocument(oldmsg.msg)">
+                          <source src="{{oldmsg.msg}}" (click)="openDocument(oldmsg.msg)">
+                        </video>
+                      </ng-container>
+                    </ng-template>
+                    <ng-template #plaintxt>
+                        {{oldmsg[0].msg}}
+                      </ng-template>
+                      <ng-template #plaintxt>
+                          {{oldmsg.msg}}
+                        </ng-template><br>
+                      <span class="msg_time_by_me">{{oldmsg.Date| date:'short'}}</span>
+                    </div>	
+          </div>
+          </ng-template>
+          </div>
+                </div>
+        <!-- end getting old msg -->
+        <!-- start chatting	-->
+        <div *ngFor="let chat of msgList">	
+          <div *ngIf="(chat.toUser === selectedFri_id && chat.user_id === user.id) || (chat.user_id === selectedFri_id && chat.toUser === user.id)">
+            <div class="d-flex justify-content-end mb-4" *ngIf="user.id===chat.user_id;else sendmsg" >
+            <!-- <div style="float: left;width: 50%;"> -->
+                  <div class="msg_cotainer_send" (click)="openDocument(chat.msg)">
+                  
+                    <ng-container *ngIf="chat.msgType === 'jpg'||chat.msgType=== 'jpeg'||chat.msgType ==='png'||chat.msgType ==='gif';else textPDF">
+                      <img src="{{chat.msg}}" (click)="openDocument(chat.msg)"><br>
+                      <button class="downloadbtn" (click)="openDocument(chat.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                      <!-- <button type="submit" class="downloadbtn" (click)="downloadImg(chat.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                    </ng-container>
+                    <ng-template #textPDF>
+                      <ng-container *ngIf="chat.msgType === 'txt'|| chat.msgType === 'pdf';else audio">
+                          <iframe width="100%" height="100%" name="plugin" (click)="openDocument(chat.msg)" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(chat.msg)' type="application/pdf"></iframe>
+                          <button class="downloadbtn" (click)="openDocument(chat.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                          <!-- <button class="downloadbtn" (click)="downloaddoc(chat.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                          <!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+                          <!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{chat.msg}}" type=""> -->
+                      </ng-container>
+                    </ng-template>
+                    <ng-template #audio>
+                      <ng-container *ngIf="chat.msgType === 'mp3'||chat.msgType === 'mid';else video">
+                          <!-- <h1>audio..</h1> -->
+                          <audio controls (click)="openDocument(chat.msg)">
+                            <source src="{{chat.msg}}" (click)="openDocument(chat.msg)">
+                          </audio>
+                        </ng-container>
+                  </ng-template>
+                  <ng-template #video>
+                    <ng-container *ngIf="chat.msgType === 'mp4';else plaintxt">
+                      <video controls (click)="openDocument(chat.msg)">
+                        <source src="{{chat.msg}}" (click)="openDocument(chat.msg)">
+                      </video>
+                    </ng-container>
+                  </ng-template>
+                    <ng-template #plaintxt>
+                        {{chat.msg}}
+                      </ng-template>
+                      <br>
+                      <span class="msg_time_send_by_me">{{chat.date| date:'short'}}</span>
+                    </div>
+                  <!-- </div>  -->
+                  
+                  <div class="img_cont_msg">
+                <img src="" class="rounded-circle user_img_msg">
+                  </div>
+        </div>
+        <ng-template #sendmsg>
+            <div class="d-flex justify-content-start mb-4" >
+                  <div class="img_cont_msg">
+                    <img src="https://devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg" class="rounded-circle user_img_msg">
+                  </div>
+                  <div class="msg_cotainer" (click)="openDocument(chat.msg)">
+                    <ng-container *ngIf="chat.msgType === 'jpg'||chat.msgType=== 'jpeg'||chat.msgType ==='png'||chat.msgType ==='gif';else textPDF">
+                      <img src="{{chat.msg}}" (click)="openDocument(chat.msg)"><br>
+                      <button class="downloadbtn" (click)="openDocument(chat.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                      <!-- <button type="submit" class="downloadbtn" (click)="downloadImg(chat.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                    </ng-container>
+                    <ng-template #textPDF>
+                      <ng-container *ngIf="chat.msgType === 'txt'|| chat.msgType === 'pdf';else audio">
+                          <iframe width="100%" height="100%" name="plugin" (click)="openDocument(chat.msg)" id="plugin" [src]='sanitizer.bypassSecurityTrustResourceUrl(chat.msg)' type="application/pdf"></iframe>
+                          <button class="downloadbtn" (click)="openDocument(chat.msg)"><mat-icon class="downloadIcon"> open_in_new</mat-icon></button>
+                          <!-- <button class="downloadbtn" (click)="downloaddoc(chat.msg)"><mat-icon class="downloadIcon"> get_app</mat-icon></button> -->
+                          <!-- <iframe src="https://cdn.filestackcontent.com/wShTWNKSseAwaeNLrq0c"></iframe> -->
+                          <!-- <embed width="100%" height="100%" name="plugin" id="plugin" src="{{chat.msg}}" type=""> -->
+                      </ng-container>
+                    </ng-template>
+                    <ng-template #audio>
+                      <ng-container *ngIf="chat.msgType === 'mp3'||chat.msgType === 'mid';else video">
+                          <!-- <h1>audio..</h1> -->
+                          <audio controls (click)="openDocument(chat.msg)">
+                            <source src="{{chat.msg}}" (click)="openDocument(chat.msg)">
+                          </audio>
+                        </ng-container>
+                  </ng-template>
+                  <ng-template #video>
+                    <ng-container *ngIf="chat.msgType === 'mp4';else plaintxt">
+                      <video controls (click)="openDocument(chat.msg)">
+                        <source src="{{chat.msg}}" (click)="openDocument(chat.msg)">
+                      </video>
+                    </ng-container>
+                  </ng-template>
+                    <ng-template #plaintxt>
+                        {{chat.msg}}
+                      </ng-template><br>
+                    <span class="msg_time_by_me">{{chat.date| date:'short'}}</span>
+                  </div>
+        </div>
+        </ng-template>
+        </div>
+              </div>
+            
+              </div> </div></div><!-- start chat end... -->
+
+          
+          <!-- get confirm request -->
+          <ng-template #confirmReq>
+            <div id="confirm_iddiv">
+            <ng-container class="card-body msg_card_body">
+              <div class="getConfirmation" *ngIf="user.id === recReq.friend_id && recReq.user_id == selectedFri_id; else sendReq">
+                 
+              <label class="confirmReq">{{confirmReqMessage}}</label>
+                <button class="viewProfilebtn" (click)="viewFriendProfile()">View Profile</button>
+              <div class="msgbtn">
+                <button class="btn btn-success" (click)="confirmReqbtn()">Confirm</button>
+                <button class="notConfirmbtn">Not Intersted</button>
+              </div>
+            </div>
+            </ng-container></div></ng-template><!-- get confirm request end... -->
+
+          <!-- send request message -->
+          <ng-template #sendReq>
+            <ng-container class="sendReq" *ngIf="recReq.friend_id === selectedFri_id && recReq.user_id === user.id">
+          <ng-container class="card-body msg_card_body" *ngFor="let sendReq of getSelectedFriReq">
+            <div *ngIf="sendReq.friend_id === selectedFri_id && sendReq.status === false && sendReq.user_id === user.id">
+          <label class="sendReq">{{sendReqMessage}}</label>
+          </div>
+          </ng-container></ng-container></ng-template><!-- send request message end... -->
+
+
+        
+          </div>
 
                           <!-- <div class="d-flex justify-content-start mb-4">
                               <div class="img_cont_msg">

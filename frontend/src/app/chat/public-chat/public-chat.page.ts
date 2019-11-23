@@ -148,13 +148,6 @@ this.getAllGroups();
 
 console.log("cureent user is ",this.user.id);
 
-
-
-//check group avaliablibility
-if(this.selectedGroup_id){
-this.checkGpAvaliabl=true;
-}
-
 //start public user chat
 this.chatserverService.startPrivateChat().subscribe(
 (res)=>{
@@ -205,8 +198,6 @@ private getAllGroups(){
     this.selectedGroup_id=selectGroup_id; //########
     this.selectedGroup_name= selectGroup_name; //#########
     
-   
-
     this.chatService.getGroupMembers(selectGroup_id).subscribe(
       (res)=>{
         console.log("get members are",res);
@@ -244,6 +235,11 @@ private getAllGroups(){
     console.log("joinConfirm_result is closed",this.dialogServices.joinConfirm_result);
    }
 
+//check group avaliablibility
+  if(this.selectedGroup_id){
+    this.checkGpAvaliabl=true;
+  }
+
 }
   // choose group end
 
@@ -274,7 +270,7 @@ async sendMessage(){
     this.router.navigate(['/auth/login']);
     return false;
   }
-  
+
 //delete whole chat
 async deleteChat(){
   console.log("inside deleteChat", this.selectedGroup_id);
@@ -289,5 +285,41 @@ viewProfile()
 viewGroupProfile(){
   this.router.navigate(['/friendProfile']);
 }
+//typing message / check teztArea empty or not 
+textAreaEmpty(){
+  if (this.textValue != '') {
+    console.log("this.textValue *********** ",this.textValue);
+    this.istype=true;
+    this.chatserverService.typeUser(this.user.username,this.selectedGroup_id,this.user.id,this.istype);
+  }
+  else{
+    this.istype=false;
+    this.chatserverService.typeUser(this.user.username,this.selectedGroup_id,this.user.id,this.istype);
+      console.log("this.textValue @@@@@@@@@@@@@ ",this.textValue);
+    }
+}
+//send message my pass enter key
+async keyDownFunction(event) {
+  if(event.keyCode == 13) {
+    // this.typeMsg=false;
+    if(this.selectedGroup_id){
+      console.log("send btn works...", this.selectedGroup_id);
+      this.chatserverService.sendAnyMessage(this.user.id,this.msg,this.selectedGroup_id,'textMsg');
+      let lmsg=await this.chatService.lastMsgPatch(this.selectedGroup_id,{"msg":this.msg});
+      console.log("lmsg  ", lmsg);
+  }
+  else{
+      //  for public users
+      console.log("public user works ",this.selectedFriend_id," user id ", this.user.id);
+      // this.chatcommService.sendPrivateMessage(this.user.id,this.msg,this.selectedFriend_id);
+        }
+        let textMsg=(document.getElementById('msgTextarea') as HTMLTextAreaElement).value="";
+    }
+}
+
+ leave(){
+  this.chatserverService.leaveGroup(this.user.username,this.selectedGroup_id, this.selectedGroup_name); 
+  this.chatService.leaveGroup(this.selectedGroup_id,this.leaveGroupForm.value).subscribe();
+ }
 }
  

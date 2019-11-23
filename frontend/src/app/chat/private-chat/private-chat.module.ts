@@ -19,18 +19,18 @@ const routes: Routes = [
 ]; 
 
 @NgModule({
+  declarations: [PrivateChatPage],
   imports: [ 
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     IonicModule,
-    RouterModule.forChild(routes), 
     MaterialModule,
     ReactiveFormsModule,
     MatDialogModule
   ],
-  exports: [MatDialogModule],
-  declarations: [PrivateChatPage,PrivateChatPage]
+  // exports: [MatDialogModule], 
+ 
 })
 export class PrivateChatPageModule {}

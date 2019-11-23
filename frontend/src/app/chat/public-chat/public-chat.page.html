@@ -72,7 +72,7 @@
               <span>Log Out</span>
             </button>  
             </mat-menu>
-        </div>
+        </div> 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -295,7 +295,7 @@
 
                   </div>
                   <div class="card-footer" style="padding-left: 0 !important;padding-right: 0 !important;">
-                    <div class="input-group" style="padding-bottom: 25px !important;display: flex;">
+                    <div class="input-group" style="padding-bottom: 25px !important;display: flex;" (keydown)="keyDownFunction($event)">
                       <div class="input-group-append">
                         <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
                       </div>

@@ -587,7 +587,7 @@ ul {
     .msg_head{
     position: relative;
     }
-  //   .input-group{
+  //   .input-group{ 
   //     position: relative;
   // /* display: table; */
   // /* border-collapse: separate; */
@@ -596,3 +596,9 @@ ul {
   // /* padding-right: 16px !important; */
   // padding-bottom: 25px !important;
   //   }
+  #groupinfoBlock{
+    position: absolute;
+  }
+  #chatBlock{
+    position: relative;
+  }
