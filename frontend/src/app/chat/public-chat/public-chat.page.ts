@@ -58,6 +58,7 @@ export class PublicChatPage implements OnInit {
     private router: Router, private profileService: ProfileServiceService) { }
 
   async ngOnInit() { 
+    
     document.getElementById("chatBlock").style.visibility="hidden";
     document.getElementById("chatHeader").style.visibility="hidden";
     document.getElementById("groupinfoBlock").style.visibility="visible";
