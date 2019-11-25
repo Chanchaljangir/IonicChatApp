@@ -63,12 +63,12 @@ export class PrivateChatPage implements OnInit {
 
     this.timeIntervalStop=false;
     let that = this;
-    this.timeIntervalStop=setInterval(() => {
-      console.log("set time interval");
-      that.getNotifications();
-      this.getAllUsers(); 
-      this.getAllRequset();
-    }, 7000);
+    // this.timeIntervalStop=setInterval(() => {
+    //   console.log("set time interval");
+    //   that.getNotifications();
+    //   this.getAllUsers(); 
+    //   this.getAllRequset();
+    // }, 7000);
 
     document.getElementById("chatBlock").style.visibility="hidden";
     document.getElementById("chatHeader").style.visibility="hidden";

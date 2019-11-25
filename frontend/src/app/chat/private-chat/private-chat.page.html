@@ -104,7 +104,7 @@
         
             <ion-list>
 
-          <ion-item *ngFor="let puser of users; let i=index">
+          <ng-container *ngFor="let puser of users; let i=index" class="ionitem">
             <div class="d-flex bd-highlight" *ngIf="!(puser._id === this.user.id)" (click)="chooseUser(puser.username, puser._id)">
               <div class="img_cont">
                 <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
@@ -131,8 +131,8 @@
                 </ng-container>
               </div>
             </div>
-          </ion-item>
-          <ion-item>
+          </ng-container>
+          <!-- <ion-item>
             <div class="d-flex bd-highlight">
               <div class="img_cont">
                 <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
@@ -143,7 +143,7 @@
                 <p>Yolduz is online</p>
               </div>
             </div>
-          </ion-item>
+          </ion-item> -->
             </ion-list>
                   </div>
         </div>

@@ -52,6 +52,7 @@ padding-left: 0 !important;
   padding:  0.75rem 0 !important;
   overflow-y: auto;
   white-space: nowrap;
+  padding-top: 0 !important;
 }
 .msg_card_body{
   overflow-y: auto;
@@ -125,6 +126,8 @@ background-color: rgba(0,0,0,0.3) !important;
   width: 100% !important;
   padding: 5px 10px; 
   margin-bottom: 15px !important;
+  border-bottom: 3px solid #16171942;
+  border-bottom-width: thin;
 }
 .active{
   background-color: rgba(0,0,0,0.3);
@@ -602,3 +605,6 @@ ul {
   #chatBlock{
     position: relative;
   }
+  // .ionitem{
+  //   height: 0px;
+  // }
